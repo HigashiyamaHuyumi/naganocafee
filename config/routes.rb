@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   
   namespace :public do
     resources :customers, only: [:show, :edit, :update] # 顧客リソース用のルートを追加
+    resources :items, only: [:index, :show] # 顧客用の items ルート
+  end
+  
+  namespace :admin do
+    resources :items # 管理者用の items ルート
   end
 
   # 管理者用
@@ -19,4 +24,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "homes#top"
   get '/about', to: 'homes#about', as: 'home_about' #aboutページルート
+  resources :items
+
 end

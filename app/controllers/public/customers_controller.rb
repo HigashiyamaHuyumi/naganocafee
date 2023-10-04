@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
+  before_action :customer_state, only: [:edit, :update]
   
   def show #顧客のマイページ
     @customer = Customer.find(params[:id])
@@ -40,6 +41,11 @@ class Public::CustomersController < ApplicationController
     unless customer.id == current_customer.id
       redirect_to customer_path(current_user)
     end
+  end
+  
+  def customer_state
+    customer = Customer.find(params[:id])
+    is_active = customer.id == current_customer.id
   end
   
 end

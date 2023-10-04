@@ -1,0 +1,27 @@
+<h1>商品編集</h1>
+
+  <!-- エラーチェック -->
+  <% if @item.errors.any? %>
+    <%= @item.errors.count %> errors prohibited this obj from being saved:
+    <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+<%= form_with model: @item do |f| %>
+
+ <h4>商品名</h4>
+ <%= f.text_field :name %>
+
+  <h4>商品説明</h4>
+  <%= f.text_area :introduction %>
+  
+  <h4>税抜価格</h4>
+ <%= f.text_field :price %>
+
+  <br>
+  <%= f.submit '変更を保存' ,class: "btn btn-success" %>
+
+<% end %>
