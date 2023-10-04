@@ -1,31 +1,22 @@
-<h2>編集画面 <%= resource_name.to_s.humanize %></h2>
+<h2>会員情報編集 <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :名前 %>
-    <%= f.label :（姓） %>
+    <%= f.label :氏名 %>
     <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-    <%= f.label :（名） %>
     <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
   </div>
 
   <div class="field">
     <%= f.label :フリガナ %>
-    <%= f.label :（セイ） %>
     <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
-    <%= f.label :（メイ） %>
     <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
   
   <div class="field">
-    <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+    <%= f.label :postal_code, "郵便番号" %>
     <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
   </div>
 
@@ -35,20 +26,24 @@
   </div>
   
   <div class="field">
-    <%= f.label :telephone_number, "電話番号(ハイフンなし)" %>
+    <%= f.label :telephone_number, "電話番号" %>
     <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
   </div>
 
-  
+  <div class="field">
+    <%= f.label :メールアドレス %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>  
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "編集内容を保存" ,class: "btn btn-success" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
+<div>
+  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+</div>
+
 

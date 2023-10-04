@@ -24,54 +24,54 @@
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-  
-              <% if customer_signed_in? %> <!--ログインしているときの表示-->
-
-                <!-- ログアウトリンク -->
+              
+              <!-- 共通のメニュー項目（誰もログインしていない状態） -->
+              
+              
+              <% if customer_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <% if current_customer %>
-                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>
-                  <% end %>
+                  <%= link_to "マイページ", public_customer_path(current_customer), class: "btn btn-outline-dark" %>
+                </li>
+                
+                <!-- li class="nav-item">
+                  < %= link_to "カート", cart_path, class: "btn btn-success" %>
+                </li -->
+                
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>
+                </li>
+                
+              <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
+                <!--li class="nav-item">
+                  < %= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark" %>
                 </li>
                 
                 <li class="nav-item">
-                  <% if current_admin %>
-                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
-                  <% end %>
+                  < %= link_to "商品履歴一覧", admin_order_histories_path, class: "btn btn-outline-dark" %>
+                </li -->
+                
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
-  
-              <% else %><!--ログアウトしているときの表示-->
-                <!--home-->
+             
+              
+              <% else %>
                 <li class="nav-item">
-                  <%= link_to "Home" , root_path , class: "btn btn-outline-dark" %>
-                </li> 
-  
-                <!--about-->
-                <li class="nav-item">
-                  <%= link_to "About" , home_about_path , class: "btn btn-outline-dark" %>
+                <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
                 
-                <!--sign up-->
                 <li class="nav-item">
-                  <% if current_customer %>
-                    <%= link_to "Sign up" , new_public_customer_registration_path , class: "btn btn-outline-dark" %>
-                  <% end %>
+                  <!-- %= link_to "商品一覧", products_path, class: "btn btn-outline-dark" % -->
                 </li>
-  
-                <!--log in-->
+                
                 <li class="nav-item">
-                  <% if current_customer %>
-                    <%= link_to "Log in" , new_public_customer_session_path , class: "btn btn-outline-dark" %>
-                  <% end %>
-                </li> 
-                  
+                  <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark" %>
+                </li>
+                
                 <li class="nav-item">
-                  <% if current_admin %>
-                    <%= link_to "Log in" , new_admin_session_path , class: "btn btn-outline-dark" %>
-                  <% end %>
-                </li> 
-  
-              <% end %>
+                  <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-dark" %>
+                </li>
+               <% end %>
   
             </ul>
           </div>

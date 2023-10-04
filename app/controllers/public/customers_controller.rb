@@ -23,6 +23,12 @@ class Public::CustomersController < ApplicationController
     end
   end
   
+  def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to root_path, notice: "アカウントが削除されました。"
+  end
+  
   private
 
   def customer_params

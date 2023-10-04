@@ -2,7 +2,7 @@
   <div class="btn-box col-10 mx-auto">
     <h2>管理者ログイン</h2>
     
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(:admin, url: admin_session_path) do |f| %>
       <div class="field">
         <%= f.label :メールアドレス %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -25,6 +25,6 @@
       </div>
     <% end %>
     
-    <%= render "admin/shared/links" %>
+    <!-- %= render "admin/shared/links" % -->
   </div>
 </div>
