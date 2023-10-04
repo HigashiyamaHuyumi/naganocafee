@@ -11,6 +11,65 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container">
+          <div class="navbar-brand" href="/">
+            <%= link_to "NaganoCafe", root_path, style: "font-size: 2rem; color: #FFFFFF;" %>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+  
+              <% if customer_signed_in? %> <!--ログインしているときの表示-->
+
+                <!-- ログアウトリンク -->
+                <li class="nav-item">
+                  <% if current_customer %>
+                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-danger" %>
+                  <% end %>
+                </li>
+  
+              <% else %><!--ログアウトしているときの表示-->
+                <li class="nav-item">
+                  <%= link_to root_path , class: "nav-link text-white" do %>
+                    <i class="fas fa-home"></i> Home
+                  <% end %>
+                </li> <!--home-->
+  
+                <li class="nav-item">
+                  <%= link_to home_about_path , class: "nav-link text-white" do %>
+                    <i class="fas fa-link"></i> About
+                  <% end %>
+                </li> <!--about-->
+  
+                <li class="nav-item">
+                  <% if current_customer %>
+                    <%= link_to new_public_customer_registration_path , class: "nav-link text-white" do%>
+                      <i class="fas fa-user-plus"></i> Sign up
+                    <% end %>
+                  <% end %>
+                </li> <!--sign up-->
+  
+                <li class="nav-item">
+                  <% if current_customer %>
+                    <%= link_to new_public_customer_session_path , class: "nav-link text-white" do %>
+                      <i class="fas fa-sign-in-alt"></i> Log in
+                    <% end %>
+                  <% end %>
+                </li> <!--log in-->
+  
+              <% end %>
+  
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

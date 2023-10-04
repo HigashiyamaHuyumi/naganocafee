@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  
+  namespace :public do
+    resources :customers, only: [:show, :edit, :update] # 顧客リソース用のルートを追加
+  end
 
   # 管理者用
   # URL /admin/sign_in ...

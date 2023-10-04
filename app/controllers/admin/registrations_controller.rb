@@ -59,4 +59,22 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  #def create
+    #@customer = Customer.new(customer_params)
+     #@customer.last_name = params[:customer][:last_name]
+    #if @customer.save
+      #sign_in(@customer) # ログイン状態にする
+      #redirect_to public_customer_path(@customer) # マイページにリダイレクト
+    #else
+      #render :new
+    #end
+  #end
+
+  #private
+
+  #def customer_params
+    #params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number, :password, :password_confirmation)
+  #end
+  
 end
