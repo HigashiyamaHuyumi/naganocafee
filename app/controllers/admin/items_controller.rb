@@ -13,17 +13,15 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       #flash[:notice] ='You have created book successfully.'
-      #redirect_to book_path(@book)
+      redirect_to admin_item_path(@item)
     else
       @items = Item.all
-      render :index
+      render :new
     end
   end
 
   def show #データの内容（詳細）を表示する
-    @item = Item.new
     @item = Item.find(params[:id])
-    #@profile_image = @user.get_profile_image if @user.present?
   end
 
   def edit #データを更新するためのフォームを表示す
@@ -50,7 +48,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :prise)
+    params.require(:item).permit(:name, :introduction, :price, :image)
   end
 
 end

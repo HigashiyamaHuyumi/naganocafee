@@ -1,26 +1,32 @@
 <h1>商品新規登録</h1>
 
 <% if @item.errors.any? %>
- <%= @item.errors.count %> errors prohibited this book from being saved:
- <ul>
-   <% @item.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
- </ul>
+  <%= @item.errors.count %> errors prohibited this item from being saved:
+  <ul>
+  <% @item.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+  </ul>
 <% end %>
 
-<%= form_with model: @item,url: '/items', method: :post do |f| %>
+<%= form_with model: @item,url: admin_items_path, method: :post, local: true, multipart: true do |f| %>
 
-  <h4>商品名</h4>
-  <%= f.text_field :name %>
-
-  <h4>商品説明</h4>
-  <%= f.text_area :introduction %>
-  
-  <h4>税抜価格</h4>
-  <%= f.text_field :price %>
-
+  <%= f.label :"商品画像" %>
+   <%= f.file_field :image, accept: "image/*" %>
   </br>
+
+  <%= f.label :"商品名" %>
+  <%= f.text_field :name %>
+  </br>
+
+  <%= f.label :"商品説明" %>
+  <%= f.text_area :introduction %>
+  </br>
+  
+  <%= f.label :"税抜価格" %>
+  <%= f.text_field :price %>円
+  </br>
+  
   <%= f.submit'新規登録', class: "btn btn-success" %>
 
 <% end %>

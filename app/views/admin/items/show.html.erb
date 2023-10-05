@@ -1,5 +1,30 @@
  <h1>商品詳細</h1>
 
-  <%= link_to @item.name %>
+  <table class = "table table-striped">
 
-  <%= link_to @item.introduction %>
+  <thead>
+    <tr>
+      
+      <th>商品名</th>
+      <td><%= link_to @item.name %></td>
+      
+      
+      <th>商品説明</th>
+      <td><%= @item.introduction %></td>
+      
+      <th>税抜価格</br>(税抜価格)</th>
+      <td><%= @item.price %></td>
+      
+  </thead>
+
+  <tbody>
+      <tr>
+        
+        
+        
+      </tr>
+
+  </tbody>
+
+</table>
+
