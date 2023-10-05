@@ -1,30 +1,36 @@
- <h1>商品詳細</h1>
+<div class="container">
+ <div class="col-12">
+  <h1>商品詳細</h1>
+ 
+  <div class="row">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image %>
+      <% else %>
+        <%= image_tag "no_image.jpg", width: 50, height: 50 %>
+      <% end %>
+  </div>
 
-  <table class = "table table-striped">
+  <div class="row">
+    <div class="col-6">
+      <table class = "table table-striped">
 
-  <thead>
-    <tr>
-      
-      <th>商品名</th>
-      <td><%= link_to @item.name %></td>
-      
-      
-      <th>商品説明</th>
-      <td><%= @item.introduction %></td>
-      
-      <th>税抜価格</br>(税抜価格)</th>
-      <td><%= @item.price %></td>
-      
-  </thead>
-
-  <tbody>
-      <tr>
-        
-        
-        
-      </tr>
-
-  </tbody>
-
-</table>
-
+      <tbody>
+        <tr>
+           <th>商品名</th>
+           <td><%= link_to @item.name %></td>
+        </tr>
+           
+         <tr>
+           <th>商品説明</th>
+           <td><%= @item.introduction %></td>
+         </tr>
+           
+         <tr>
+           <th>税抜価格</br>(税抜価格)</th>
+           <td><%= @item.price %></td>
+         </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

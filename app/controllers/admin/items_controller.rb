@@ -13,7 +13,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       #flash[:notice] ='You have created book successfully.'
-      redirect_to admin_item_path(@item)
+      redirect_to admin_items_path
     else
       @items = Item.all
       render :new
@@ -32,7 +32,7 @@ class Admin::ItemsController < ApplicationController
    @item = Item.find(params[:id])
     if @item.update(item_params)
      #flash[:notice] ='You have updated book successfully.'
-     #redirect_to item_path(@item.id)
+     redirect_to adminitem_path(@item.id)
     else
      render :edit
     end
