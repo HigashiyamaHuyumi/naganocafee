@@ -4,19 +4,21 @@ class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
   
   protected
-    
-  def validate_customer_account
-    # 入力されたemailからアカウントを1件取得
-    @customer = Customer.find_by(email: params[:customer][:email])
   
-    # アカウントを取得できなかった場合、このメソッドを終了する
-    return if !@customer
+  def customer_state
+    @customer = Customer.find_by(email: params[:customer][:email]) # 入力されたemailからアカウントを1件取得
   
-    # 退会している場合
-    if !@customer.active?
+    if !@customer # アカウントが見つからない場合
+      flash[:alert] = "アカウントが見つかりませんでした。"
+      redirect_to new_customer_registration_path
+    elsif !@customer.active? # 退会している場合
       flash[:alert] = "退会済みのアカウントです。"
       redirect_to new_customer_registration_path
     end
+  end
+   
+  def customer_state
+  # ここにcustomer_stateメソッドの実装を追加
   end
   # before_action :configure_sign_in_params, only: [:create]
 
