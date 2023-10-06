@@ -24,6 +24,6 @@ Rails.application.routes.draw do
 	# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 	root to: "homes#top"
 	get '/about', to: 'homes#about', as: 'home_about' #aboutページルート
-	resources :items
-
+  get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
+  get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
 end
