@@ -12,4 +12,15 @@ class Item < ApplicationRecord
     end
     image
   end
+  
+  # 画像のサイズを100x100ピクセルに変更するメソッド
+  def resize_image
+    if image.attached?
+      image.variant(resize: '100x100')
+    else
+      # デフォルトの画像を表示する場合の処理
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      return File.open(file_path)
+    end
+  end
 end
