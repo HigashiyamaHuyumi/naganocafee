@@ -10,7 +10,6 @@ class Public::CustomersController < ApplicationController
   def edit #顧客の登録情報編集画面
     is_matching_login_customer
     @customer = Customer.find(params[:id])
-    @current_user = current_user
   end
   
   def update #顧客の登録情報更新

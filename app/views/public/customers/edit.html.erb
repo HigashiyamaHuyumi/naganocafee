@@ -1,7 +1,16 @@
 <h2>会員情報編集</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+<%= form_for @customer, url: public_customer_path(@customer), method: :get do |f| %>
+
+  <!-- エラーチェック -->
+  <% if @customer.errors.any? %>
+    <%= @customer.errors.count %> errors prohibited this obj from being saved:
+    <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
 
   <div class="field">
     <%= f.label :氏名 %>
@@ -41,7 +50,7 @@
 <% end %>
 
 <link to "退会する" ,>
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+  <!-- %= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete % -->
 </div>
 
 
