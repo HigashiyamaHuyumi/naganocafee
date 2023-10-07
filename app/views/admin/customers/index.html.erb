@@ -1,0 +1,24 @@
+<h1>一覧ページ</h1>
+
+<table class = "table table-striped">
+
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= link_to customer.last_name, admin_customer_path(customer) %></td>
+        <td><%= customer.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

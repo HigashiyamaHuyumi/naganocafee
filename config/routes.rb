@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 	
 	namespace :admin do
 		resources :items,only: [:index, :new, :create, :show, :edit, :update, :destroy] # 管理者用の items ルート
+	  resources :customers,only: [:index, :show, :edit, :update] # 管理者用の customers ルート
 	end
 
 	# 管理者用
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
 	root to: "homes#top"
 	get '/about', to: 'homes#about', as: 'home_about' #aboutページルート
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
+   get '/customers', to: 'admin/customers#index', as: 'customers_index' #会員一覧ページルート
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
 end
