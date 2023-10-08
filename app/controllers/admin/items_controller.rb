@@ -12,10 +12,9 @@ class Admin::ItemsController < ApplicationController
   def create #データを追加（保存）する
     @item = Item.new(item_params)
     if @item.save
-      #flash[:notice] ='You have created book successfully.'
+      flash[:notice] ='Item was successfully created.'
       redirect_to admin_items_path
     else
-      @items = Item.all
       render :new
     end
   end

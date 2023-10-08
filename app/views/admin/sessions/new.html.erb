@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="btn-box col-10 mx-auto">
-    <h2>管理者ログイン</h2>
-    admin<%= current_admin %>
+    <h5><span style="background-color: #dcdcdc;">管理者ログイン</span></h5>
+    <%= current_admin %>
 
     <%= form_for(:admin, url: admin_session_path) do |f| %>
       <div class="field">
