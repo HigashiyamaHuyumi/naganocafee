@@ -1,6 +1,6 @@
-<h2>会員情報編集</h2>
+<h5><span style="background-color: #dcdcdc;">会員情報編集</span></h5>
 
-<%= form_for @customer, url: public_customer_path(@customer), method: :get do |f| %>
+<%= form_for @customer, url: public_customer_path(@customer), method: :patch do |f| %>
 
   <!-- エラーチェック -->
   <% if @customer.errors.any? %>

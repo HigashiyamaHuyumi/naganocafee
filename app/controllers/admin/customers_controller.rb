@@ -2,6 +2,7 @@ class Admin::CustomersController < ApplicationController
   
   def index # データの一覧を表示する
     @customers = Customer.all
+    
   end
 
   def show #データの内容（詳細）を表示する
@@ -16,9 +17,9 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
      #flash[:notice] ='You have updated book successfully.'
-     #redirect_to admin_item_path(@item.id)
+     redirect_to admin_customer_path(@customer.id)
     else
-     #render :edit
+     render :edit
     end
   end
 
@@ -32,7 +33,7 @@ class Admin::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number, :password, :password_confirmation)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number, :password, :password_confirmation, :is_active)
   end
 
   

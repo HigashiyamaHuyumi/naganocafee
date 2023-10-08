@@ -1,4 +1,4 @@
-<h1>一覧ページ</h1>
+<h5><span style="background-color: #dcdcdc;">会員一覧</span></h5>
 
 <table class = "table table-striped">
 
@@ -17,8 +17,9 @@
         <td><%= customer.id %></td>
         <td><%= link_to customer.last_name, admin_customer_path(customer) %></td>
         <td><%= customer.email %></td>
+        <td><%= customer.is_active ? "有効" : "退会" %></td>
       </tr>
-    <% end %>
+    <% end %>済み
   </tbody>
 
 </table>
