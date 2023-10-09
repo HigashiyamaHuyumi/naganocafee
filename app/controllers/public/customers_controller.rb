@@ -21,8 +21,13 @@ class Public::CustomersController < ApplicationController
       render 'edit'
     end
   end
-
-  def destroy
+  
+  def confirm
+    is_matching_login_customer
+    @customer = Customer.find(params[:id])
+  end
+  
+  def withdrawal
     @customer = Customer.find(params[:id])
     @customer.destroy
     redirect_to root_path, notice: "アカウントが削除されました。"
