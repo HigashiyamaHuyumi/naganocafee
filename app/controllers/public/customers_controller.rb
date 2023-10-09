@@ -15,18 +15,18 @@ class Public::CustomersController < ApplicationController
     is_matching_login_customer
     @customer = Customer.find(params[:id]) #ユーザーの取得
     if @customer.update(customer_params)
-      redirect_to public_customer_path(@customer)
+      redirect_to customer_path(@customer)
       flash[:notice] = 'You have updated user successfully.'
     else
       render 'edit'
     end
   end
-  
+
   def confirm
     is_matching_login_customer
     @customer = Customer.find(params[:id])
   end
-  
+
   def withdrawal
     @customer = Customer.find(params[:id])
     @customer.destroy
@@ -42,7 +42,7 @@ class Public::CustomersController < ApplicationController
   def is_matching_login_customer
     customer = Customer.find(params[:id])
     unless customer.id == current_customer.id
-      redirect_to public_customer_path(current_customer)
+      redirect_to customer_path(current_customer)
     end
   end
 

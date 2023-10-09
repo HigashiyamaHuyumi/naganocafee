@@ -2,7 +2,6 @@
 
   <div class="row">
     <div class="col-md-5">
-    <h5>商品詳細</h5>
 
       <% if @item.image.attached? %>
         <%= image_tag @item.image, width: 400, height: 400 %>
@@ -12,24 +11,13 @@
     </div>
 
     <div class="col-md-5">
-      <table class = "table table-striped">
-        <tbody>
-          <tr>
-             <th>商品名</th>
-             <td><%= @item.name %></td>
-          </tr>
-           <tr>
-             <th>商品説明</th>
-             <td><%= @item.introduction %></td>
-           </tr>
-           <tr>
-             <th>税抜価格</br>(税抜価格)</th>
-             <td><%= number_with_delimiter((@item.price * 1.1).to_i) %>(<%= number_with_delimiter(@item.price) %>)円</td>
-           </tr>
-        </tbody>
-      </table>
+      <b><%= @item.name %></b>
+      <p><%= @item.introduction %></p>
+      <b>￥<%= number_with_delimiter((@item.price * 1.1).to_i) %></b>(税込)
       
-      <%= link_to "編集する", edit_item_path(@item), method: :patch, class: "btn btn-success" %>
+      </br>
+      
+      <%= link_to "カートに入れる" , class: "btn btn-success" %>
     </div>
 
   </div>

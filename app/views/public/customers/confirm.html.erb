@@ -6,8 +6,8 @@
   退会する場合は、「退会する」をクリックしてください。
 </p>
 
-<%= link_to "退会しない", edit_public_customer_path(current_customer), class: "btn btn-primary" %>
+<%= link_to "退会しない", edit_customer_path(current_customer), class: "btn btn-primary" %>
 
-<%= form_with(model: @customer, url: withdrawal_public_customer_path(@customer), method: :patch) do |f| %>
+<%= form_with(model: @customer, url: withdrawal_customer_path(@customer), method: :patch) do |f| %>
   <%= f.submit "退会する", class: "btn btn-danger" %>
 <% end %>

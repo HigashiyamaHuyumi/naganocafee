@@ -1,6 +1,6 @@
 <h5><span style="background-color: #dcdcdc;">会員情報編集</span></h5>
 
-<%= form_for @customer, url: public_customer_path(@customer), method: :patch do |f| %>
+<%= form_for @customer, url: customer_path(@customer), method: :patch do |f| %>
 
   <!-- エラーチェック -->
   <% if @customer.errors.any? %>
@@ -49,4 +49,4 @@
   </div>
 <% end %>
 
-<%= link_to "退会する", confirm_public_customer_path(current_customer), class: "btn btn-danger" %>
+<%= link_to "退会する", confirm_customer_path(current_customer), class: "btn btn-danger" %>
