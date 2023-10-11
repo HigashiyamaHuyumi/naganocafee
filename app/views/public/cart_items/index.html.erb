@@ -13,21 +13,26 @@
   </thead>
 
   <tbody>
-    <% items.each do |item| %>
+    <% @cart_items.each do |cart_item| %>
       <tr>
         <td>
-          <% if item.image.attached? %>
-            <%= image_tag item.image, width: 400, height: 400 %>
+          <% if cart_item.item.image.attached? %>
+            <%= image_tag cart_item.item.image, width: 100, height: 100 %>
           <% else %>
-            <%= image_tag "no_image.jpg", width: 400, height: 400 %>
+            <%= image_tag "no_image.jpg", width: 100, height: 100 %>
           <% end %>
-          <%= item.name %>
+          <%= cart_item.item.name %>
         </td>
-        <td><%= @cart_item.amount %></td>
-        <td><%= number_with_delimiter((@item.price * 1.1).to_i) %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= number_with_delimiter((cart_item.item.price * 1.1).to_i) %></td>
+        <td>
+          <!-- %= link_to "削除", cart_item_path(cart_item), method: :delete, data: { confirm: "本当に削除しますか?" % -->
+        </td>
       </tr>
     <% end %>
   </tbody>
 
 </table>
+
+
 

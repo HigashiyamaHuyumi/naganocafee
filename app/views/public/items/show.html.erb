@@ -15,7 +15,14 @@
       <p><%= @item.introduction %></p>
       <b>￥<%= number_with_delimiter((@item.price * 1.1).to_i) %></b>(税込)
     
-      <%= render 'public/cart_items/create', item: @item %>
+      <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+        <div class="form-group">
+          <%= f.label :amount, "数量:" %>
+          <%= f.select :amount, (1..10), {}, class: "form-control" %>
+        </div>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.submit "カートに追加", class: "btn btn-success" %>
+      <% end %>
     
     </div>
 

@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   
   has_one_attached :image
+  has_many :cart_items
   
   def get_image
     unless image.attached?
