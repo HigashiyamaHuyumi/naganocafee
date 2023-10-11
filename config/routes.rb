@@ -37,5 +37,4 @@ Rails.application.routes.draw do
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
   get '/cart_items', to: 'public/cart_items#index', as: 'cart_items_index' #カートページルート
-  delete '/cart_items', to: 'public/cart_items#destroy_all'
 end

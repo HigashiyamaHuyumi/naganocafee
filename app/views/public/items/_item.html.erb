@@ -14,7 +14,7 @@
               </div>
               <div class="col-md-4">
                 <h5><%= link_to item.name, item_show_path(item) %></h5>
-                <%= number_to_currency(item.price, unit: '¥') %>
+                ￥<%= number_with_delimiter(item.price, precision: 0) %>
               </div>
             </div>
           </div>

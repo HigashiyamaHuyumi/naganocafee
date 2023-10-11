@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-  before_action :set_cart_item, only: [:destroy, :destroy_all]
+  before_action :set_cart_item, only: [:destroy]
 
   def create
     item = Item.find(cart_item_params[:item_id]) # フォームから送信されるアイテムIDを取得

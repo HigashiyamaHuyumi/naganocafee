@@ -1,44 +1,57 @@
-<h5><span style="background-color: #dcdcdc;">ショッピングカート</span></h5>
-
-<%= link_to cart_items_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
-  カートを空にする
-<% end %>
-
-<table class="table table-striped" border="1">
-
-  <thead>
-    <th>商品名</th>
-    <th>単価(税込)</th>
-    <th>数量</th>
-    <th>小計</th>
-    <th>　</th>
-  </thead>
-
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
-      <tr>
-        <td>
-          <% if cart_item.item.image.attached? %>
-            <%= image_tag cart_item.item.image, width: 100, height: 100 %>
-          <% else %>
-            <%= image_tag "no_image.jpg", width: 100, height: 100 %>
-          <% end %>
-          <%= cart_item.item.name %>
-        </td>
-        <td><%= cart_item.item.with_tax_price %></td>
-        <td><%= cart_item.amount %></td>
-        <td><%= cart_item.subtotal %></td>
-          <% @合計金額 += cart_item.subtotal %>
-        <td>
-          <%= link_to cart_item_path(cart_item), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
-            削除
-          <% end %>
-        </td>
-      </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      
+    <h5><span style="background-color: #dcdcdc;">ショッピングカート</span></h5>
+    
+    <%= link_to destroy_all_cart_items_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+      カートを空にする
     <% end %>
-  </tbody>
-
-</table>
-
-
-
+    
+    <table class="table table-striped" border="1">
+    
+      <thead>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>　</th>
+      </thead>
+    
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <% if cart_item.item.image.attached? %>
+                <%= image_tag cart_item.item.image, width: 100, height: 100 %>
+              <% else %>
+                <%= image_tag "no_image.jpg", width: 100, height: 100 %>
+              <% end %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td>
+              <%= select_tag "cart_item[amount]", options_for_select(1..10, cart_item.amount), class: "form-control" %>
+              <%= submit_tag "更新", class: "btn btn-success" %>
+            </td>
+            <td><%= cart_item.subtotal %></td>
+              
+            <td>
+              <%= link_to cart_item_path(cart_item), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+                削除する
+              <% end %>
+            </td>
+          </tr>
+          <% @合計金額 += cart_item.subtotal %>
+        <% end %>
+      </tbody>
+    
+    </table>
+    
+    <%= link_to item_index_path, class: "btn btn-primary" do %>
+      買い物を続ける
+    <% end %>
+    
+    </div>
+  </div>
+</div>
