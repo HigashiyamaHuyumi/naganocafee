@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
 		resources :items, only: [:index, :show] # 顧客用の items ルート
+		resources :cart_items, only: [:create, :index] # 顧客用の items ルート
 	end
 	
 	namespace :admin do

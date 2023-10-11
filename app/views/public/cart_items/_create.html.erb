@@ -1,0 +1,8 @@
+<%= form_for @cart_item do |f| %>
+  <div class="form-group">
+    <%= f.label :amount, "数量:" %>
+    <%= f.select :amount, (1..10), {}, class: "form-control" %>
+  </div>
+  <%= f.hidden_field :item_id, value: item.id %>
+  <%= f.submit "カートに追加", class: "btn btn-success" %>
+<% end %>

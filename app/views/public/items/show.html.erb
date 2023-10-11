@@ -14,10 +14,9 @@
       <b><%= @item.name %></b>
       <p><%= @item.introduction %></p>
       <b>￥<%= number_with_delimiter((@item.price * 1.1).to_i) %></b>(税込)
-      
-      </br>
-      
-      <%= link_to "カートに入れる" , class: "btn btn-success" %>
+    
+      <%= render 'public/cart_items/create', item: @item %>
+    
     </div>
 
   </div>

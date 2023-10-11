@@ -1,0 +1,33 @@
+<h5><span style="background-color: #dcdcdc;">ショッピングカート</span></h5>
+
+<table class = "table table-striped">
+
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>　</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% items.each do |item| %>
+      <tr>
+        <td>
+          <% if item.image.attached? %>
+            <%= image_tag item.image, width: 400, height: 400 %>
+          <% else %>
+            <%= image_tag "no_image.jpg", width: 400, height: 400 %>
+          <% end %>
+          <%= item.name %>
+        </td>
+        <td><%= @cart_item.amount %></td>
+        <td><%= number_with_delimiter((@item.price * 1.1).to_i) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+

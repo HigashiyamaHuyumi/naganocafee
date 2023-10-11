@@ -7,6 +7,7 @@ class Public::ItemsController < ApplicationController
   
   def show #データの内容（詳細）を表示する
     @item = Item.find(params[:id])
+    @cart_item = CartItem.new(item: @item, amount: 1) # 1 は初期数量の例です
   end
 
   private
