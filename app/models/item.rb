@@ -24,4 +24,9 @@ class Item < ApplicationRecord
       return File.open(file_path)
     end
   end
+  
+  # 消費税を求めるメソッド
+  def with_tax_price
+    (price * 1.1).floor
+  end
 end
