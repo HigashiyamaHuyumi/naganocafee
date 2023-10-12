@@ -1,5 +1,5 @@
 class Public::CartItemsController < ApplicationController
-  before_action :set_cart_item, only: [:destroy]
+  before_action :set_cart_item, only: [:update,:destroy]
 
   def create
     item = Item.find(cart_item_params[:item_id]) # フォームから送信されるアイテムIDを取得
@@ -20,6 +20,15 @@ class Public::CartItemsController < ApplicationController
     @cart_items.each do |cart_item|
       @合計金額 += cart_item.subtotal
     end
+  end
+  
+  def update #データを更新する
+    if @cart_item.update(cart_item_params)
+      flash[:success] = "カートアイテムを更新しました。"
+    else
+      flash[:error] = "カートアイテムの更新に失敗しました。"
+    end
+    redirect_to cart_items_path
   end
 
   def destroy

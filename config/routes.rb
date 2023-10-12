@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
 		resources :items, only: [:index, :show] # 顧客用の items ルート
-		resources :cart_items, only: [:create, :index, :destroy] do
+		resources :cart_items, only: [:create, :index, :update, :destroy] do
       collection do
         delete :destroy_all # 顧客用の items ルート
       end

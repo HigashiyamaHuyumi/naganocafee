@@ -31,26 +31,38 @@
             </td>
             <td><%= cart_item.item.with_tax_price %></td>
             <td>
-              <%= select_tag "cart_item[amount]", options_for_select(1..10, cart_item.amount), class: "form-control" %>
-              <%= submit_tag "更新", class: "btn btn-success" %>
+              <%= form_with(model: cart_item, url: cart_item_path(cart_item), method: :put) do |f| %>
+                <%= select_tag "cart_item[amount]", options_for_select(1..10, cart_item.amount), class: "form-control" %>
+                <%= submit_tag "更新", class: "btn btn-success" %>
+              <% end %>
             </td>
             <td><%= cart_item.subtotal %></td>
-              
             <td>
               <%= link_to cart_item_path(cart_item), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
                 削除する
               <% end %>
             </td>
           </tr>
-          <% @合計金額 += cart_item.subtotal %>
         <% end %>
       </tbody>
-    
     </table>
     
     <%= link_to item_index_path, class: "btn btn-primary" do %>
       買い物を続ける
     <% end %>
+       
+     <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>合計金額</td>
+        <td><%= @合計金額 %></td>
+        
+      </tr>
+    </tfoot>
+
+    
+    
     
     </div>
   </div>
