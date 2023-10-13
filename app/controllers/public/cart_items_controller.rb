@@ -3,14 +3,22 @@ class Public::CartItemsController < ApplicationController
 
   def create
     item = Item.find(cart_item_params[:item_id]) # フォームから送信されるアイテムIDを取得
-    @cart_item = current_customer.cart_items.build(cart_item_params)
-    if @cart_item.save
-      #flash[:success] = "#{amount}個の#{item.name}をカートに追加しました。"
-      redirect_to cart_items_path # カートページにリダイレクト
-    else
-      #flash[:error] = "商品をカートに追加できませんでした。"
-      redirect_to item_path(item) # 商品詳細ページにリダイレクト
+    existing_cart_item = current_customer.cart_items.find_by(item_id: item.id)
+    amount = cart_item_params[:amount].to_i  # フォームから送信された数量を整数に変換
+
+    if existing_cart_item  #商品がカート内に存在する場合
+      existing_cart_item.amount += amount
+      existing_cart_item.save
+    else  #商品がカート内に存在しない場合
+      @cart_item = current_customer.cart_items.build(item: item, amount: amount)
+      if @cart_item.save
+        flash[:success] = "#{amount}個の#{item.name}をカートに追加しました。"
+      else
+        flash[:error] = "商品をカートに追加できませんでした。"
+        redirect_to item_path(item) #商品詳細ページにリダイレクト
+      end
     end
+    redirect_to cart_items_path # カートページにリダイレクト
   end
 
   def index

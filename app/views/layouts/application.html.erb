@@ -90,6 +90,8 @@
         </div>
       </nav>
     </header>
+    <%= flash[:success] %>
+    <%= flash[:error] %>
     <%= yield %>
   </body>
 </html>
