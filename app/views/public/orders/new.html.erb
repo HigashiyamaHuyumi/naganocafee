@@ -1,0 +1,37 @@
+
+<b>支払方法</b>
+<%= form_with model: @order, url: orders_path, method: :get do |f| %>
+  <%= f.radio_button :payment_method, "credit_card" %>
+  <%= f.label :payment_method_credit_card, "クレジットカード" %>
+  <%= f.radio_button :payment_method, "transfer" %>
+  <%= f.label :payment_method_transfer, "銀行振込" %>
+<% end %>
+
+<b>お届け先</b>
+<%= form_with model: @customer, url: orders_path, method: :get do |f| %>
+  <%= f.radio_button :address %>
+  <%= f.label :address, "ご自身の住所" %>
+<% end %>
+
+  <%= f.radio_button :shipping_address %>
+  <%= f.label :shipping_address, "新しいお届け先" %>
+  
+  <div class="field">
+    <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %>
+    <%= f.text_field :shipping_postal_code, autofocus: true, autocomplete: "shipping_postal_code" %>
+  </div>
+  
+   <div class="field">
+    <%= f.label :住所 %>
+    <%= f.text_field :shipping_address, autofocus: true, autocomplete: "shipping_address" %>
+  </div>
+  
+   <div class="field">
+    <%= f.label :宛名 %>
+    <%= f.text_field :shipping_name, autofocus: true, autocomplete: "shipping_name" %>
+  </div>
+  
+  
+  <%= link_to order_confirmation_path, class: "btn btn-primary" do %>
+    確認画面へ進む
+  <% end %>

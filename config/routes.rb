@@ -11,12 +11,13 @@ Rails.application.routes.draw do
 		  get :confirm, on: :member # 退会確認ページ用のルート
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
-		resources :items, only: [:index, :show] # 顧客用の items ルート
+		resources :items, only: [:index, :show] #顧客用のitemsルート
 		resources :cart_items, only: [:create, :index, :update, :destroy] do
       collection do
-        delete :destroy_all # 顧客用の items ルート
+        delete :destroy_all
       end
     end
+    resources :orders, only: [:new, :index, :show] 
 	end
 	
 	namespace :admin do
