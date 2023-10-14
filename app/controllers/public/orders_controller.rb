@@ -1,11 +1,12 @@
 class Public::OrdersController < ApplicationController
   
   def new　#注文情報入力
-    @order = Order.new
-    @customer = current_customer
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
   end
   
   def confirmation #注文情報確認
+
   end
 
   def create
@@ -63,5 +64,6 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:customer_id, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method)
   end
+  
 end
 

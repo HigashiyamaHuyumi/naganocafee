@@ -17,7 +17,9 @@ Rails.application.routes.draw do
         delete :destroy_all
       end
     end
-    resources :orders, only: [:new, :index, :show] 
+    resources :orders, only: [:new, :index, :show] do
+      post :confirmation, on: :collection
+    end
 	end
 	
 	namespace :admin do
@@ -38,4 +40,5 @@ Rails.application.routes.draw do
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
   get '/cart_items', to: 'public/cart_items#index', as: 'cart_items_index' #カートページルート
+  post '/orders/confirmation', to: 'public/orders#iconfirmation', as: 'orders_confirmation' #注文情報確認ページルート
 end
