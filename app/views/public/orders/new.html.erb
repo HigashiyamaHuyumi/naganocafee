@@ -1,30 +1,32 @@
 <h5><span style="background-color: #dcdcdc;">注文情報入力</span></h5>
 
 <b>支払方法</b>
-<%= form_with model: @order, url: orders_path, method: :get do |f| %>
+<%= form_with model: @order, url: orders_confirmation_path, method: :post do |f| %>
   <%= f.radio_button :payment_method, "credit_card" %>
   <%= f.label :payment_method_credit_card, "クレジットカード" %>
   <%= f.radio_button :payment_method, "transfer" %>
   <%= f.label :payment_method_transfer, "銀行振込" %>
 
-  <div><b>お届け先</b></div>
+
+<div><b>お届け先</b></div>
 
   <div>
-    <%= f.radio_button :address, "member_address", checked: true %>
-    <%= f.label :address, "ご自身の住所" %>
+  <%= f.radio_button :delivery_option, "member_address" %>
+  <%= f.label :delivery_option_member_address, "ご自身の住所" %>
   </div>
-  <div>
+   <div>
     〒<%= current_customer.postal_code + "　" + current_customer.address + "　" + current_customer.last_name + current_customer.first_name %>
   </div>
-
-<% end %>
-
-
-<%= form_with model: @order, url: orders_path, method: :get do |f| %>
-  <%= f.radio_button :shipping_address, "shipping_address" %>
-  <%= f.label :shipping_address, "新しいお届け先" %>
   
-  <div class="field">
+   <div>
+  <%= f.radio_button :delivery_option, "shipping_address" %>
+  <%= f.label :delivery_option_shipping_address, "新しいお届け先" %>
+</div>
+
+
+
+<div id="member_address_fields">
+  <!-- ご自身の住所の入力フォーム --> <div class="field">
     <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %>
     <%= f.text_field :shipping_postal_code, autofocus: true, autocomplete: "shipping_postal_code" %>
   </div>
@@ -39,6 +41,12 @@
     <%= f.text_field :shipping_name, autofocus: true, autocomplete: "shipping_name" %>
   </div>
   
+
+</div>
+
+
+
+
 <% end %>
   
 <%= link_to orders_confirmation_path, class: "btn btn-primary" do %>
