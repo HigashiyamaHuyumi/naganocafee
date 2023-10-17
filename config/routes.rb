@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         delete :destroy_all
       end
     end
+    post '/orders/confirmation', to: 'orders#confirmation', as: 'orders_confirmation' #注文情報確認ページルート
     resources :orders, only: [:new, :create, :index, :show]
 	end
 	
@@ -39,6 +40,6 @@ Rails.application.routes.draw do
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
   get '/cart_items', to: 'public/cart_items#index', as: 'cart_items_index' #カートページルート
-#注文情報確認ページルート
-  post '/orders/confirmation', to: 'public/orders#confirmation', as: 'orders_confirmation'
+
+ 
 end

@@ -6,6 +6,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirmation #注文情報確認
+    @order = Order.new(order_params)
+    @address = Address.find(params[:order][:address_id])
+    @order.postal_code = @address.postal_code
+    @order.address = @address.address
+    @order.name = @address.name
+    render 'confirmation' # 注文確認画面のビューを表示
   end
 
   def complete #注文完了画面
@@ -23,8 +29,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method)
+    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method)
   end
 
 end
-
