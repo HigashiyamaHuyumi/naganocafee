@@ -34,15 +34,19 @@
     </div>
     
     <div class="col-md-2">
-      
-    <!-- 送料、商品合計、請求金額を表示 -->
       <table class="table table-striped" border="1">
-        <th>送料</th>
-        <td></td>
-        <th>商品合計</th>
-        <td><%= number_with_delimiter(@合計金額) %></td>
-        <th>請求金額</th>
-        <td><%= number_to_currency(@order.total_payment) %></td>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th>商品合計</th>
+          <td><%= number_with_delimiter(@合計金額) %></td>
+        </tr>
+        <tr>
+          <th>請求金額</th>
+          <td><%= number_with_delimiter(@order.total_payment) %></td>
+        </tr>
       </table>
     </div>
     
@@ -68,8 +72,8 @@
       <p>銀行振込</p>
     <% end %>
     
-      
-    <!-- 注文を確定するボタン >
-    < %= link_to "注文を確定する", orders_create_path, class: "btn btn-primary" %  -->
+    <%= form_with model: @order, url: orders_confirmation_path, method: :post do |f| %>
+       <%= f.submit'注文を確定する', class: "btn btn-primary" %>
+    <% end %> 
   </div>
 </div>
