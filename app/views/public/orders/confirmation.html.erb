@@ -1,54 +1,75 @@
-<h5><span style="background-color: #dcdcdc;">注文情報確認</span></h5>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+
+      <h5><span style="background-color: #dcdcdc;">注文情報確認</span></h5>
+      
+      <table class="table table-striped" border="1">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <% if cart_item.item.image.attached? %>
+                  <%= image_tag cart_item.item.image, width: 100, height: 100 %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", width: 100, height: 100 %>
+                <% end %>
+                <%= cart_item.item.name %>
+              </td>
+              <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= number_with_delimiter(cart_item.subtotal) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     
-<h2>支払い方法</h2>
-<% if @order.payment_method == "credit_card" %>
-  <p>クレジットカード</p>
-<% elsif @order.payment_method == "transfer" %>
-  <p>銀行振込</p>
-<% end %>
-
-<!-- 配送先情報の表示 -->
-<h2>配送先情報</h2>
-<% if @order.shipping_address == "member_address" %>
-  <p>お届け先: ご自身の住所</p>
-  <p>郵便番号: <%= current_customer.postal_code %></p>
-  <p>住所: <%= current_customer.address %></p>
-  <p>宛名: <%= current_customer.last_name + current_customer.first_name %></p>
-<% elsif @order.shipping_address == "shipping_address" %>
-  <p>お届け先: 新しいお届け先</p>
-  <p>郵便番号: <%= @order.shipping_postal_code %></p>
-  <p>住所: <%= @order.shipping_address %></p>
-  <p>宛名: <%= @order.shipping_name %></p>
-<% end %>
-
-<!-- カート内の商品一覧の表示 -->
-<h2>注文内容</h2>
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>価格</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
-      <tr>
-        <td><%= cart_item.item.name %></td>
-        <td><%= number_to_currency(cart_item.item.price) %></td>
-        <td><%= cart_item.amount %></td>
-        <td><%= number_to_currency(cart_item.subtotal) %></td>
-      </tr>
+    <div class="col-md-2">
+      
+    <!-- 送料、商品合計、請求金額を表示 -->
+      <table class="table table-striped" border="1">
+        <th>送料</th>
+        <td></td>
+        <th>商品合計</th>
+        <td><%= number_with_delimiter(@合計金額) %></td>
+        <th>請求金額</th>
+        <td><%= number_to_currency(@order.total_payment) %></td>
+      </table>
+    </div>
+    
+  <div class="row">
+    <!-- お届け先情報を表示 -->
+    <h2>お届け先</h2>
+    <% if @order.shipping_address == "customer_address" %>
+      <p>お届け先: ご自身の住所</p>
+      <p>郵便番号: <%= current_customer.postal_code %></p>
+      <p>住所: <%=current_customer.address %></p>
+      <p>宛名: <%= current_customer.last_name %> <%= current_customer.first_name %></p>
+    <% elsif @order.shipping_address == "shipping_address" %>
+      <p>お届け先: 新しいお届け先</p>
+      <p>郵便番号: <%= @order.shipping_postal_code %></p>
+      <p>住所: <%= @order.shipping_address %></p>
+      <p>宛名: <%= @order.shipping_name %></p>
     <% end %>
-  </tbody>
-</table>
-
-<!-- 合計金額の表示 -->
-<h2>合計金額</h2>
-<p>商品合計: <%= number_to_currency(@order.calculate_item_total) %></p>
-<p>送料: <%= number_to_currency(@order.postage) %></p>
-<p>総支払額: <%= number_to_currency(@order.total_payment) %></p>
-
-<!-- 注文ボタン -->
-<%= link_to "注文を確定する", orders_create_path, class: "btn btn-primary" %>
+    
+    <b>支払い方法</b>
+    <% if @order.payment_method == "credit_card" %>
+      <p>クレジットカード</p>
+    <% elsif @order.payment_method == "transfer" %>
+      <p>銀行振込</p>
+    <% end %>
+    
+      
+    <!-- 注文を確定するボタン >
+    < %= link_to "注文を確定する", orders_create_path, class: "btn btn-primary" %  -->
+  </div>
+</div>

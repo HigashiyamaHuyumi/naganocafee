@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :cart_items
+  has_many :orders
 
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, presence: true
@@ -16,6 +17,5 @@ class Customer < ApplicationRecord
   def deactivate!
     update(is_active: false)
   end
-
 
 end

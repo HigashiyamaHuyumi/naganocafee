@@ -10,18 +10,18 @@
 <div><b>お届け先</b></div>
 
   <div>
-  <%= f.radio_button :delivery_option, "member_address" %>
-  <%= f.label :delivery_option_member_address, "ご自身の住所" %>
+  <%= f.radio_button :shipping_address, "customer_address" %>
+  <%= f.label :customer_address, "ご自身の住所" %>
   </div>
    <div>
     〒<%= current_customer.postal_code + "　" + current_customer.address + "　" + current_customer.last_name + current_customer.first_name %>
   </div>
    <div>
-  <%= f.radio_button :delivery_option, "shipping_address" %>
-  <%= f.label :delivery_option_shipping_address, "新しいお届け先" %>
+  <%= f.radio_button :shipping_address, "shipping_address" %>
+  <%= f.label :shipping_address, "新しいお届け先" %>
 </div>
 
-<div id="member_address_fields"><!-- ご自身の住所の入力フォーム -->
+<div id="member_address_fields"><!-- 新しい入力フォーム -->
   <div class="field">
     <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %>
     <%= f.text_field :shipping_postal_code, autofocus: true, autocomplete: "shipping_postal_code" %>
