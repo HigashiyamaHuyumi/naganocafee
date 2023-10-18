@@ -16,10 +16,16 @@ class Public::OrdersController < ApplicationController
     @order.postage = 800  # 固定の送料金額（800円）
     @order.total_payment =  @order.postage + @合計金額
     
-    if params[:order][:shipping_address] == "customer_address" #ご自身の住所を使用する場合
-      @order.shipping_postal_code = current_customer.postal_code
-      @order.shipping_address = current_customer.address
-      @order.shipping_name = "#{current_customer.last_name} #{current_customer.first_name}"
+    @address_type = params[:order][:shipping_address]
+
+    if @address_type == "customer_address"
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.family_name + current_customer.first_name
+    elsif @address_type == "shipping_address"
+      @order.shipping_postal_code = params[:order][:shipping_postal_code]
+      @order.shipping_address = params[:order][:shipping_address]
+      @order.shipping_name = params[:order][:shipping_name]
     end
     
     if @order.save  #注文情報を保存できた場合の処理（ここにリダイレクトなどを追加）
@@ -30,6 +36,15 @@ class Public::OrdersController < ApplicationController
   end
   
   def create #注文確定処理
+    @order = Order.new(order_params)
+
+    if @order.save
+      # 注文データの保存に成功した場合の処理
+      redirect_to order_confirmation_path
+    else
+      # 注文データの保存に失敗した場合の処理
+      render :new
+    end
   end
 
   def complete #注文完了画面
