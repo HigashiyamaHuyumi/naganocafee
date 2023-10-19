@@ -10,14 +10,14 @@
 <div><b>お届け先</b></div>
 
   <div>
-  <%= f.radio_button :shipping_address, "customer_address" %>
+  <%= f.radio_button :select_address, "customer_address" %>
   <%= f.label :customer_address, "ご自身の住所" %>
   </div>
    <div>
     〒<%= current_customer.postal_code + "　" + current_customer.address + "　" + current_customer.last_name + current_customer.first_name %>
   </div>
    <div>
-  <%= f.radio_button :shipping_address, "shipping_address" %>
+  <%= f.radio_button :select_address, "shipping_address" %>
   <%= f.label :shipping_address, "新しいお届け先" %>
 </div>
 
