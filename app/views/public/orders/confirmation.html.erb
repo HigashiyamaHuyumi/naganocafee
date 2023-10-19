@@ -62,17 +62,15 @@
 
   <div class="row">
     <b>お届け先</b>
+    <%= form_with model: @order, url: orders_path, method: :post do |f| %>
     <p>
       〒<%= @order.shipping_postal_code %> <%= @order.shipping_address %>
       </br><%= @order.shipping_name %>
     </p>
-  </div>
 
-  <div class="row">
-    <%= form_with url: orders_path, method: :post do %>
       <%= hidden_field_tag 'order[pay_method]', @selected_pay_method %>
       <%= hidden_field_tag 'order[address_type]', @address_type %>
-      <%= submit_tag "注文を確定する", class: "btn btn-success" %>
+      <%= f.submit'注文を確定する', class: "btn btn-success" %>
     <% end %>
   </div>
 

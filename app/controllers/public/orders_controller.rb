@@ -1,43 +1,80 @@
 class Public::OrdersController < ApplicationController
-  
-  def new
+
+  def new #注文情報入力
     @order = Order.new
   end
 
-  def confirmation
+  def confirmation #注文情報確認
     @cart_items = current_customer.cart_items # カート内の商品を取得
     @合計金額 = 0 # 合計金額を初期化
     @cart_items.each do |cart_item|
       @合計金額 += cart_item.subtotal
     end
-    
+
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.postage = 800  # 固定の送料金額（800円）
     @order.total_payment =  @order.postage + @合計金額
-    
+
     @address_type = params[:order][:select_address]
-    
     if @address_type == "customer_address"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
       @order.shipping_name = current_customer.last_name + current_customer.first_name
-      
     elsif @address_type == "shipping_address"
       @order.shipping_postal_code = params[:order][:shipping_postal_code]
       @order.shipping_address = params[:order][:shipping_address]
       @order.shipping_name = params[:order][:shipping_name]
     end
-    
-    if @order.save  #注文情報を保存できた場合の処理（ここにリダイレクトなどを追加）
-      redirect_to create_path
-    else #注文情報を保存できなかった場合の処理（エラーメッセージ表示などを追加）
-      render 'confirmation', total_payment: @total_payment  # 合計金額をビューに渡す
+  end
+
+  def create
+    @order = Order.new
+    @order.customer_id = current_customer.id
+    @order.postage = 800  # 固定の送料金額（800円）
+
+    @cart_items = current_customer.cart_items # カート内の商品を取得
+    @合計金額 = 0 # 合計金額を初期化
+    @cart_items.each do |cart_item|
+      @合計金額 += cart_item.subtotal
+    end
+    @order.total_payment =  @order.postage + @合計金額
+
+    @order.payment_method = params[:order][:payment_method]
+    if @order.payment_method == "credit_card"
+      @order.status = 0
+    elsif @order.payment_method == "transfer"
+      @order.status = 1
+    end
+
+    @address_type = params[:order][:select_address]
+    if @address_type == "customer_address"
+      @order.shipping_postal_code = current_customer.postal_code
+      @order.shipping_address = current_customer.address
+      @order.shipping_name = current_customer.last_name + current_customer.first_name
+    elsif @address_type == "shipping_address"
+      @order.shipping_postal_code = params[:order][:shipping_postal_code]
+      @order.shipping_address = params[:order][:shipping_address]
+      @order.shipping_name = params[:order][:shipping_name]
+    end
+
+    if @order.save
+      if @order.status == 0
+        @cart_items.each do |cart_item|
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, quantity: cart_item.quantity, making_status: 0)
+        end
+      else
+        @cart_items.each do |cart_item|
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, quantity: cart_item.quantity, making_status: 1)
+        end
+      end
+      @cart_items.destroy_all
+      redirect_to complete_orders_path
+    else
+      render :new
     end
   end
-  
-  def create #注文確定処理
-  end
+
 
   def complete #注文完了画面
   end
