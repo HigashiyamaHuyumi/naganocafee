@@ -16,7 +16,7 @@ class Public::OrdersController < ApplicationController
     @order.postage = 800  # 固定の送料金額（800円）
     @order.total_payment =  @order.postage + @合計金額
 
-    @address_type = params[:order][:select_address]
+    @address_type = params[:order][:address_type]
     if @address_type == "customer_address"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
@@ -28,8 +28,9 @@ class Public::OrdersController < ApplicationController
     end
   end
 
+
   def create
-    @order = Order.new
+    @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.postage = 800  # 固定の送料金額（800円）
 
@@ -46,8 +47,8 @@ class Public::OrdersController < ApplicationController
     elsif @order.payment_method == "transfer"
       @order.status = 1
     end
-
-    @address_type = params[:order][:select_address]
+    
+    @address_type = params[:order][:address_type]
     if @address_type == "customer_address"
       @order.shipping_postal_code = current_customer.postal_code
       @order.shipping_address = current_customer.address
@@ -59,16 +60,6 @@ class Public::OrdersController < ApplicationController
     end
 
     if @order.save
-      if @order.status == 0
-        @cart_items.each do |cart_item|
-          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, quantity: cart_item.quantity, making_status: 0)
-        end
-      else
-        @cart_items.each do |cart_item|
-          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, quantity: cart_item.quantity, making_status: 1)
-        end
-      end
-      @cart_items.destroy_all
       redirect_to complete_orders_path
     else
       render :new
