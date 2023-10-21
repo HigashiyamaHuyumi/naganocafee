@@ -1,12 +1,69 @@
 <h5><span style="background-color: #dcdcdc;">注文履歴詳細</span></h5>
 
-<table class = "table table-striped">
-  <% @order_detail.each do |order| %>
-  
-  <th>注文日</th>
-  <td><%= order.created_at %></td>
-  
+
+<b>購入者</b>
+<%= @order.customer.last_name %><%= @order.customer.first_name %>
+<br>
+
+<b>注文日</b>
+<%= @order.created_at %>
+<br>
+
+<b>配送先</b>
+〒<%= @order.shipping_postal_code.to_s.insert(3, "-") %>
+<%= @order.shipping_address %>
+<br>
+<%= @order.shipping_name %>
+<br>
+
+<b>支払い方法</b>
+<% if @order.payment_method == "credit_card" %>
+  <%= "クレジットカード" %>
+<% elsif @order.payment_method == "transfer" %>
+  <%= "銀行振込" %>
+<% end %>
+<br>
+
+
+-------------------------------------------
+
+<table class='order-show-table table'>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+    <tr>
+  </thead>
+  <% @order_details.each do |order_detail| %>
+  <tbody>
+    <tr>
+      <td><%= order_detail.name%></td>
+      <td>¥<%= (order_detail.price*1.1).floor.to_s(:delimited) %></td>
+      <td><%= order_detail.amount %></td>
+      <td>¥<%= ((order_detail.price * order_detail.amount*1.1).floor).to_s(:delimited) %></td>
+    </tr>
+  </tbody>
   <% end %>
-
-
 </table>
+
+<div>
+  <p>
+    <strong>商品合計</strong>
+     ¥<%= (@order.total_fee - @order.shipping).to_s(:delimited)%>
+  </p>
+</div>
+<br>
+
+<div>
+  <b>送料</b>
+  ¥<%= @order.postage %>
+</div>
+<br>
+
+<div>
+  <b>請求金額合計</b>
+  ¥<%= @order.total_fee.to_s(:delimited) %>
+</div>
+<br>

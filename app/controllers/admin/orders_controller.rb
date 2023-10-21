@@ -6,6 +6,7 @@ class Admin::OrdersController < ApplicationController
 
   def show #注文履歴を表示する
     @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def edit #データを更新するためのフォームを表示す
