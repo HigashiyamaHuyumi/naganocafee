@@ -1,0 +1,12 @@
+<h5><span style="background-color: #dcdcdc;">注文履歴詳細</span></h5>
+
+<table class = "table table-striped">
+  <% @order_detail.each do |order| %>
+  
+  <th>注文日</th>
+  <td><%= order.created_at %></td>
+  
+  <% end %>
+
+
+</table>

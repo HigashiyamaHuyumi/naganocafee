@@ -28,7 +28,6 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
@@ -43,11 +42,11 @@ class Public::OrdersController < ApplicationController
 
     @order.payment_method = params[:order][:payment_method]
     if @order.payment_method == "credit_card"
-      @order.status = 0
+      @order.payment_method = 0
     elsif @order.payment_method == "transfer"
-      @order.status = 1
+      @order.payment_method = 1
     end
-    
+
     @address_type = params[:order][:address_type]
     if @address_type == "customer_address"
       @order.shipping_postal_code = current_customer.postal_code
@@ -60,7 +59,7 @@ class Public::OrdersController < ApplicationController
     end
 
     if @order.save
-      redirect_to complete_orders_path
+      redirect_to orders_complete_path
     else
       render :new
     end
@@ -79,6 +78,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method)
+    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method, :address_type)
   end
 end

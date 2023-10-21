@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+
       <h5><span style="background-color: #dcdcdc;">注文情報確認</span></h5>
 
       <table class="table table-striped" border="1">
@@ -62,16 +64,22 @@
 
   <div class="row">
     <b>お届け先</b>
-    <%= form_with model: @order, url: orders_path, method: :post do |f| %>
     <p>
       〒<%= @order.shipping_postal_code %> <%= @order.shipping_address %>
       </br><%= @order.shipping_name %>
     </p>
-
-      <%= hidden_field_tag 'order[pay_method]', @selected_pay_method %>
-      <%= hidden_field_tag 'order[address_type]', @address_type %>
-      <%= f.submit'注文を確定する', class: "btn btn-success" %>
-    <% end %>
   </div>
+
+  <%= f.hidden_field :shipping_postal_code, :value => @order.shipping_postal_code %>
+  <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
+  <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
+  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+
+
+
+    <%= f.submit'注文を確定する', class: "btn btn-success" %>
+
+
+    <% end %>
 
 </div>

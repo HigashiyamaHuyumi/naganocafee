@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 		registrations: "public/registrations",
 		sessions: 'public/sessions'
 	}
-	
+
 	scope module: 'public' do
 		resources :customers, only: [:show, :edit, :update] do # 顧客リソース用のルートを追加
 		  get :confirm, on: :member # 退会確認ページ用のルート
@@ -18,13 +18,15 @@ Rails.application.routes.draw do
       end
     end
     post '/orders/confirmation', to: 'orders#confirmation', as: 'orders_confirmation' #注文情報確認ページルート
+  	get '/orders/complete', to: 'orders#complete', as: 'orders_complete' #注文情報確認ページルート
     resources :orders, only: [:new, :create, :index, :show]
 	end
-	
+
 	namespace :admin do
 		resources :items,only: [:index, :new, :create, :show, :edit, :update, :destroy] # 管理者用の items ルート
 	  resources :customers,only: [:index, :show, :edit, :update] # 管理者用の customers ルート
-    resources :orders, only: [:index]
+    resources :orders,only: [:show, :index] 
+    resources :orders_detail,only: [:show]
 	end
 
 	# 管理者用
@@ -32,14 +34,13 @@ Rails.application.routes.draw do
 	devise_for :admin, skip: [:registrations, :passwords], controllers: {
 		sessions: "admin/sessions"
 	}
-	
+
 	# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 	root to: "homes#top"
 	get '/about', to: 'homes#about', as: 'home_about' #aboutページルート
-	get '/customers', to: 'admin/customers#index', as: 'customers_index' #会員一覧ページルート
+
+
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
   get '/cart_items', to: 'public/cart_items#index', as: 'cart_items_index' #カートページルート
-
- 
 end

@@ -1,25 +1,24 @@
 class Admin::OrdersController < ApplicationController
 
   def index # 注文一覧を表示する
-    @order = Order.new
     @orders = Order.all
   end
 
   def show #注文履歴を表示する
-    @item = Item.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def edit #データを更新するためのフォームを表示す
-    @item = Item.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def update #データを更新する
-   @item = Item.find(params[:id])
-    if @item.update(item_params)
-     #flash[:notice] ='You have updated book successfully.'
-     redirect_to admin_item_path(@item.id)
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      redirect_to admin_order_path(@order)
+      #flash[:notice] = "注文情報が更新されました。"
     else
-     render :edit
+      render :edit
     end
   end
 
