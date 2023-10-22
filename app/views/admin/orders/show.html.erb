@@ -24,29 +24,24 @@
 <% end %>
 <br>
 
-
--------------------------------------------
-
-<table class='order-show-table table'>
+<h2>注文商品</h2>
+<table>
   <thead>
     <tr>
       <th>商品名</th>
-      <th>単価（税込）</th>
-      <th>数量</th>
-      <th>小計</th>
-    <tr>
-  </thead>
-  <% @order_details.each do |order_detail| %>
-  <tbody>
-    <tr>
-      <td><%= order_detail.name%></td>
-      <td>¥<%= (order_detail.price*1.1).floor.to_s(:delimited) %></td>
-      <td><%= order_detail.amount %></td>
-      <td>¥<%= ((order_detail.price * order_detail.amount*1.1).floor).to_s(:delimited) %></td>
+      <th>価格</th>
     </tr>
+  </thead>
+  <tbody>
+    <% @order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.name %></td>
+        <td>¥<%= order_detail.price %></td>
+      </tr>
+    <% end %>
   </tbody>
-  <% end %>
 </table>
+
 
 <div>
   <p>
@@ -67,3 +62,5 @@
   ¥<%= @order.total_fee.to_s(:delimited) %>
 </div>
 <br>
+
+

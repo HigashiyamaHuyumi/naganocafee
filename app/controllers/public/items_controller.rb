@@ -2,7 +2,7 @@ class Public::ItemsController < ApplicationController
   
   def index # データの一覧を表示する
     @item = Item.new
-    @items = Item.all
+    @items = Item.page(params[:page])
   end
   
   def show #データの内容（詳細）を表示する

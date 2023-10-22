@@ -5,15 +5,15 @@ class Admin::OrdersController < ApplicationController
   end
 
   def show #注文履歴を表示する
-    @order = Order.find(params[:id])
-    @order_details = @order.order_details
+    @order = Order.find(params[:id]) #注文IDから注文を取得
+    @order_details = @order.order_details # 注文に関連する商品情報を取得
   end
 
   def edit #データを更新するためのフォームを表示す
     @order = Order.find(params[:id])
   end
 
-  def update #データを更新する
+  def update # データを更新する
     @order = Order.find(params[:id])
     if @order.update(order_params)
       redirect_to admin_order_path(@order)
@@ -23,11 +23,11 @@ class Admin::OrdersController < ApplicationController
     end
   end
 
-  def destroy #データを削除する
-    @item = Item.find(params[:id])  # データ（レコード）を1件取得
-    @item.destroy  # データ（レコード）を削除
-    #flash[:notice] ='Book was successfully destroyed.'
-    #redirect_to items_path # 投稿一覧画面へリダイレクト
+  def destroy # データを削除する
+    @order = Order.find(params[:id]) # 注文を取得
+    @order.destroy # 注文を削除
+    #flash[:notice] ='注文が正常に削除されました。'
+    #redirect_to orders_path # 注文一覧画面へリダイレクト
   end
 
   private
