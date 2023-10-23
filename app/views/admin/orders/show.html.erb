@@ -33,7 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @order_details.each do |order_detail| %>
+    <% @order_detail.each do |order_detail| %>
       <tr>
         <td><%= order_detail.name %></td>
         <td>¥<%= order_detail.price %></td>
@@ -46,7 +46,7 @@
 <div>
   <p>
     <strong>商品合計</strong>
-     ¥<%= (@order.total_fee - @order.shipping).to_s(:delimited)%>
+     ¥<%#= (@order.total_fee - @order.shipping).to_s(:delimited)%>
   </p>
 </div>
 <br>
@@ -59,7 +59,6 @@
 
 <div>
   <b>請求金額合計</b>
-  ¥<%= @order.total_fee.to_s(:delimited) %>
 </div>
 <br>
 
