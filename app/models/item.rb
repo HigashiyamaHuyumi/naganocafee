@@ -5,7 +5,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
   has_many :cart_items
-  has_many :orders_detail
+  has_many :orders
+  has_many :order_details
 
   def get_image
     unless image.attached?

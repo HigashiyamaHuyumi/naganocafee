@@ -59,6 +59,7 @@ class Public::OrdersController < ApplicationController
     end
 
     if @order.save
+      @cart_items.destroy_all #注文が正常に保存された場合、カートを空にする
       redirect_to orders_complete_path
     else
       render :new
@@ -78,6 +79,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method, :address_type)
+    params.require(:order).permit(:customer_id, :shipping_postal_code, :shipping_address, :shipping_name, :postage, :total_payment, :payment_method)
   end
 end
