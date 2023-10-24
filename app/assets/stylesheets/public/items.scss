@@ -1,3 +1,16 @@
 // Place all the styles related to the public/items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.label-left {
+  width: 200px;
+  text-align: left; /* ラベルのテキストを左詰めに設定 */
+  padding-left: 10px; /* 適宜調整してください */
+  }
+
+.field label {
+  width: 200px; /* ラベルの幅を調整 */
+  text-align: left; /* ラベルのテキストを左寄せ */
+  padding-right: 10px; /* ラベルと入力ボックスの間隔 */
+  }

@@ -1,43 +1,54 @@
-<h5><span style="background-color: #dcdcdc;">注文情報入力</span></h5>
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;">注文情報入力</span></h5>
 
 
-<%= form_with model: @order, url: orders_confirmation_path, method: :post do |f| %>
-  <div>
-  <b>支払方法</b>
-  <%= f.radio_button :payment_method, "credit_card" , id: :payment_method_credit_card %>
-  <%= f.label :payment_method_credit_card, "クレジットカード" %>
-  <%= f.radio_button :payment_method, "transfer", id: :payment_method_transfer %>
-  <%= f.label :payment_method_transfer, "銀行振込" %>
-  </div>
-
-  <div><b>お届け先</b></div>
-
-  <div>
-    <%= f.radio_button :address_type, "customer_address", id: :address_type_customer %>
-    <%= f.label :address_type_customer, "ご自身の住所" %>
-  </div>
-   <div>
-    〒<%= current_customer.postal_code + "　" + current_customer.address + "　" + current_customer.last_name + current_customer.first_name %>
-  </div>
-  <div>
-    <%= f.radio_button :address_type, "shipping_address", id: :address_type_shipping %>
-    <%= f.label :address_type_shipping, "新しいお届け先" %>
-  </div>
-
-  <div id="member_address_fields"><!-- 新しい入力フォーム -->
-    <div class="field">
-      <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %>
-      <%= f.text_field :shipping_postal_code, autofocus: true, autocomplete: "shipping_postal_code" %>
+  <%= form_with model: @order, url: orders_confirmation_path, method: :post do |f| %>
+    <div><b>支払方法</b></div>
+    <div>
+      <%= f.radio_button :payment_method, "credit_card", id: :payment_method_credit_card, required: true %>
+      <%= f.label :payment_method_credit_card, "クレジットカード" %>
     </div>
-    <div class="field">
-      <%= f.label :shipping_address, "住所" %>
-      <%= f.text_field :shipping_address, autofocus: true, autocomplete: "shipping_address" %>
+    <div>
+      <%= f.radio_button :payment_method, "transfer", id: :payment_method_transfer, required: true %>
+      <%= f.label :payment_method_transfer, "銀行振込" %>
     </div>
-    <div class="field">
-      <%= f.label :shipping_name, "宛名" %>
-      <%= f.text_field :shipping_name, autofocus: true, autocomplete: "shipping_name" %>
-    </div>
-  </div>
 
-  <%= f.submit'確認画面へ進む', class: "btn btn-primary" %>
-<% end %>
+    <div><b>お届け先</b></div>
+
+    <div>
+      <%= f.radio_button :address_type, "customer_address", id: :address_type_customer, required: true %>
+      <%= f.label :address_type_customer, "ご自身の住所" %>
+    </div>
+    <div>
+      〒<%= current_customer.postal_code + "　" + current_customer.address %>
+      <br>
+      <%= current_customer.last_name + current_customer.first_name %>
+    </div>
+    <div>
+      <%= f.radio_button :address_type, "shipping_address", id: :address_type_shipping, required: true %>
+      <%= f.label :address_type_shipping, "新しいお届け先" %>
+    </div>
+
+    <div id="member_address_fields"><!-- 新しい入力フォーム -->
+      <div class="field">
+        <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)", class: "label-left" %>
+        <%= f.text_field :shipping_postal_code, autofocus: true, autocomplete: "shipping_postal_code" %>
+      </div>
+      <div class="field">
+        <%= f.label :shipping_address, "住所" , class: "label-left" %>
+        <%= f.text_field :shipping_address, autofocus: true, autocomplete: "shipping_address" %>
+      </div>
+      <div class="field">
+        <%= f.label :shipping_name, "宛名" , class: "label-left" %>
+        <%= f.text_field :shipping_name, autofocus: true, autocomplete: "shipping_name" %>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-12">
+        <%= f.submit'確認画面へ進む', class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -1,37 +1,46 @@
-<h5><span style="background-color: #dcdcdc;">マイページ</span></h5>
+<div class="container">
+  <div class="row">
+    <h5><span style="background-color: #dcdcdc;">マイページ</span></h5>
+  </div>
 
-<h5>登録情報</h5>
+  <div class="row">
+    <b>登録情報</b>
+    <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-success" %>
+  </div>
 
-<%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-success" %>
+  <div class="row">
+    <div class="col-md-6">
+    <table class="table" style="border: 1px solid black;">
+      <tbody>
+        <% if @customer.present? %>
+          <tr>
+            <th style="border: 1px solid black;">氏名</th>
+            <td style="border: 1px solid black;"><%= @customer.last_name %>　<%= @customer.first_name %></td>
+          </tr>
+       　  <tr>
+            <th style="border: 1px solid black;">カナ</th>
+            <td style="border: 1px solid black;"><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+          </tr>
+           <tr>
+            <th style="border: 1px solid black;">郵便番号</th>
+            <td style="border: 1px solid black;"><%= @customer.postal_code %>
+          </tr>
+           <tr>
+            <th style="border: 1px solid black;">住所</th>
+            <td style="border: 1px solid black;"><%= @customer.address %>
+          </tr>
+          <tr>
+            <th style="border: 1px solid black;">電話番号</th>
+            <td style="border: 1px solid black;"><%= @customer.telephone_number %>
+          </tr>
+          <tr>
+            <th style="border: 1px solid black;">メールアドレス</th>
+            <td style="border: 1px solid black;"><%= @customer.last_name %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<table class = "table table-striped">
-  <tbody>
-    <% if @customer.present? %>
-      <tr>
-        <th>氏名</th>
-        <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
-      </tr>
-   　  <tr>
-        <th>カナ</th>
-        <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
-      </tr>
-       <tr>
-        <th>郵便番号</th>
-        <td><%= @customer.postal_code %>
-      </tr>
-       <tr>
-        <th>住所</th>
-        <td><%= @customer.address %>
-      </tr>
-      <tr>
-        <th>電話番号</th>
-        <td><%= @customer.telephone_number %>
-      </tr>
-      <tr>
-        <th>メールアドレス</th>
-        <td><%= @customer.last_name %>
-      </tr>
-
-    <% end %>
-  </tbody>
-</table>
+    </div>
+  </div>
+</div>

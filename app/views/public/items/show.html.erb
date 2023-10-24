@@ -14,18 +14,18 @@
       <b><%= @item.name %></b>
       <p><%= @item.introduction %></p>
       <b>￥<%= number_with_delimiter((@item.price * 1.1).to_i) %></b>(税込)
-    
+
       <% if current_customer %>
         <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-          <div class="form-group">
+          <div class="form-group"
             <%= f.label :amount, "数量:" %>
-            <%= f.select :amount, (1..10), {}, class: "form-control" %>
+            <%= f.select :amount, (1..10).to_a.unshift("数量選択"), {}, { class: "form-control" } %>
           </div>
           <%= f.hidden_field :item_id, value: @item.id %>
-          <%= f.submit "カートに追加", class: "btn btn-success" %>
+          <%= f.submit "カートに入れる", class: "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
-    
+
   </div>
 </div>

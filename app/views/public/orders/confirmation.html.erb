@@ -75,11 +75,12 @@
   <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
   <%= f.hidden_field :payment_method, :value => @order.payment_method %>
 
+  <div class="row text-center">
+    <div class="col-md-12">
+      <%= f.submit'注文を確定する', class: "btn btn-success" %>
+    </div>
+  </div>
 
-
-    <%= f.submit'注文を確定する', class: "btn btn-success" %>
-
-
-    <% end %>
+      <% end %>
 
 </div>

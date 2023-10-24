@@ -1,67 +1,79 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
-      
-    <h5><span style="background-color: #dcdcdc;">ショッピングカート</span></h5>
-    
-    <%= link_to destroy_all_cart_items_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
-      カートを空にする
-    <% end %>
-    
-    <table class="table table-striped" border="1">
-    
-      <thead>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-        <th>　</th>
-      </thead>
-    
-      <tbody>
-        <% @cart_items.each do |cart_item| %>
-          <tr>
-            <td>
-              <% if cart_item.item.image.attached? %>
-                <%= image_tag cart_item.item.image, width: 100, height: 100 %>
-              <% else %>
-                <%= image_tag "no_image.jpg", width: 100, height: 100 %>
-              <% end %>
-              <%= cart_item.item.name %>
-            </td>
-            <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
-            <td>
-              <%= form_with(model: cart_item, url: cart_item_path(cart_item), method: :put) do |f| %>
-                <%= select_tag "cart_item[amount]", options_for_select(1..10, cart_item.amount), class: "form-control" %>
-                <%= submit_tag "更新", class: "btn btn-success" %>
-              <% end %>
-            </td>
-            <td><%= number_with_delimiter(cart_item.subtotal) %></td>
-            <td>
-              <%= link_to cart_item_path(cart_item), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
-                削除する
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    
-    <%= link_to item_index_path, class: "btn btn-primary" do %>
-      買い物を続ける
-    <% end %>
-       
-     <tfoot>
-      <tr>
-        <td>合計金額</td>
-        <td><%= number_with_delimiter(@合計金額) %></td>
-      </tr>
-    </tfoot>
-     
-    <%= link_to new_order_path, class: "btn btn-success" do %>
-      情報入力に進む
-    <% end %>
-    
+    <div class="col-md-6">
+      <h5><span style="background-color: #dcdcdc;">ショッピングカート</span></h5>
+    </div>
+
+    <div class="col-md-6 text-right">
+      <%= link_to destroy_all_cart_items_path, class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+        カートを空にする
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table" style="border: 1px solid black;">
+        <thead>
+          <th style="border: 1px solid black;">商品名</th>
+          <th style="border: 1px solid black;">単価(税込)</th>
+          <th style="border: 1px solid black;">数量</th>
+          <th style="border: 1px solid black;">小計</th>
+          <th style="border: 1px solid black;"></th>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td style="border: 1px solid black;">
+                <% if cart_item.item.image.attached? %>
+                  <%= image_tag cart_item.item.image, width: 50, height: 50 %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", width: 50, height: 50 %>
+                <% end %>
+                <%= cart_item.item.name %>
+              </td>
+              <td style="border: 1px solid black;"><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
+              <td style="border: 1px solid black;">
+                <%= form_with(model: cart_item, url: cart_item_path(cart_item), method: :put) do |f| %>
+                  <%= select_tag "cart_item[amount]", options_for_select(1..10, cart_item.amount), class: "form-control" %>
+                  <%= submit_tag "変更", class: "btn btn-success" %>
+                <% end %>
+              </td>
+              <td style="border: 1px solid black;"><%= number_with_delimiter(cart_item.subtotal) %></td>
+              <td style="border: 1px solid black; text-align: center;">
+                <%= link_to cart_item_path(cart_item), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？"  do %>
+                  削除する
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to item_index_path, class: "btn btn-primary" do %>
+        買い物を続ける
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <table class="table" style="border: 1px solid black;">
+        <tr>
+          <td style="border: 1px solid black;">合計金額</td>
+          <td style="border: 1px solid black;"><%= number_with_delimiter(@合計金額) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-12">
+      <%= link_to new_order_path, class: "btn btn-success" do %>
+        情報入力に進む
+      <% end %>
     </div>
   </div>
 </div>
