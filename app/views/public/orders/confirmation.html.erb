@@ -42,11 +42,12 @@
         </tr>
         <tr>
           <th>商品合計</th>
-          <td><%= number_with_delimiter(@合計金額) %></td>
+          <td><%= number_with_delimiter(@total_payment) %></td>
         </tr>
         <tr>
           <th>請求金額</th>
-          <td><%= number_with_delimiter(@order.total_payment) %></td>
+          ¥<%= (@total_payment + 800).to_s(:delimited) %>円
+          <td><%= f.hidden_field :total_payment, :value => (@total_payment + 800) %></td>
         </tr>
       </table>
     </div>

@@ -16,10 +16,10 @@
   </div>
 
   <div class="row text-center">
-    <div class="col-md-6">
+    <div class="col-md-6 text-right">
       <%= link_to "退会しない", edit_customer_path(current_customer), class: "btn btn-primary" %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-left">
       <%= form_with(model: @customer, url: withdrawal_customer_path(@customer), method: :patch) do |f| %>
         <%= f.submit "退会する", class: "btn btn-danger" %>
       <% end %>
