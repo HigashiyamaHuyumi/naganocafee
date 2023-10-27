@@ -5,15 +5,15 @@
 
     <div class="col-md-8">
       <b>注文情報</b>
-      <table class="table table-striped" border="1">
+      <table class="table" border="1">
         <tr>
-          <th>注文日</th>
-          <td><%= @order.created_at %></td>
+          <th style="border: 1px solid black;">注文日</th>
+          <td style="border: 1px solid black;"><%= @order.created_at %></td>
         </tr>
 
         <tr>
           <th>配送先</th>
-          <td>
+          <td style="border: 1px solid black;">
             <%= @order.shipping_postal_code %><br>
             <%= @order.shipping_address %><br>
             <%= @order.shipping_name %>
@@ -21,8 +21,8 @@
         </tr>
 
         <tr>
-          <th>支払方法</th>
-          <td>
+          <th style="border: 1px solid black;">支払方法</th>
+          <td style="border: 1px solid black;">
             <% if @order.payment_method == "credit_card" %>
               <%= "クレジットカード" %>
             <% elsif @order.payment_method == "transfer" %>
@@ -36,20 +36,20 @@
 
     <div class="col-md-4">
       <b>請求情報</b>
-      <table class="table table-striped" border="1">
+      <table class="table" border="1">
         <tr>
-          <th>商品合計</th>
-          <td><%= number_with_delimiter(@合計金額) %></td>
+          <th style="border: 1px solid black;">商品合計</th>
+          <td style="border: 1px solid black;"><%= number_with_delimiter(@total_payment) %></td>
         </tr>
 
         <tr>
-          <th>送料</th>
-          <td><%= @order.postage %></td>
+          <th style="border: 1px solid black;">送料</th>
+          <td style="border: 1px solid black;"><%= @order.postage %></td>
         </tr>
 
         <tr>
-          <th>ご請求額</th>
-          <td><%= number_with_delimiter(@order.total_payment) %></td>
+          <th style="border: 1px solid black;">ご請求額</th>
+          <td style="border: 1px solid black;"><%= (@order.total_payment).to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -61,22 +61,22 @@
 
       <b>注文内容</b>
 
-      <table class="table table-striped" border="1">
+      <table class="table" border="1">
         <thead>
           <tr>
-            <th>商品</th>
-            <th>単価(税込)</th>
-            <th>個数</th>
-            <th>小計</th>
+            <th style="border: 1px solid black;">商品</th>
+            <th style="border: 1px solid black;">単価(税込)</th>
+            <th style="border: 1px solid black;">個数</th>
+            <th style="border: 1px solid black;">小計</th>
           </tr>
         </thead>
         <tbody>
         <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= order_detail.item.name %></td>
-            <td>¥<%= (order_detail.price * 1.1).floor.to_s(:delimited) %></td>
-            <td><%= order_detail.amount %></td>
-            <td>¥<%= (order_detail.price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
+            <td style="border: 1px solid black;"><%= order_detail.item.name %></td>
+            <td style="border: 1px solid black;">¥<%= number_with_delimiter(@total_payment) %></td>
+            <td style="border: 1px solid black;"><%= order_detail.amount %></td>
+            <td style="border: 1px solid black;">¥<%= (order_detail.purchase_price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
           </tr>
         <% end %>
       </tbody>

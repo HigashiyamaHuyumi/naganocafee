@@ -1,9 +1,10 @@
 class Public::CustomersController < ApplicationController
-  before_action :is_matching_login_customer, only: [:edit, :update]
+  before_action :is_matching_login_customer, only: [:show, :edit, :update, :confirm, :withdrawal]
 
-  def show #顧客のマイページ
+  def my_page #顧客のマイページ
+    is_matching_login_customer
     @customer = Customer.find(params[:id])
-    render :show
+    render :my_page
   end
 
   def edit #顧客の登録情報編集画面

@@ -32,7 +32,6 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.postage = 800  # 固定の送料金額（800円)
- 
     if @order.save!
     @cart_items = current_customer.cart_items # カート内の商品を取得
     @cart_items.each do |cart_item|
@@ -42,15 +41,12 @@ class Public::OrdersController < ApplicationController
       order_detail.item_id = cart_item.item_id
       order_detail.save!
     end
-    
-      
       @cart_items.destroy_all #注文が正常に保存された場合、カートを空にする
       redirect_to orders_complete_path
     else
       render :new
     end
   end
-
 
   def complete #注文完了画面
   end

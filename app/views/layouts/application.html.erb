@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <script src="https://kit.fontawesome.com/1a020bd911.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -26,65 +26,65 @@
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              
+
               <!-- 共通のメニュー項目（誰もログインしていない状態） -->
-              
-              
+
+
               <% if customer_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to "マイページ", customer_path(current_customer), class: "btn btn-outline-dark" %>
+                  <%= link_to "マイページ", my_page_customer_path(current_customer), class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "商品一覧", item_index_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "カート", cart_items_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
-                
+
               <% elsif admin_signed_in? %><!-- 管理者がログインしている場合のメニュー項目 -->
-                
+
                 <li class="nav-item">
                   <%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-dark" %>
                 </li>
-                
-                
+
+
                 <li class="nav-item">
                   <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "注文履歴一覧", admin_orders_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
                 </li>
-             
-              
+
+
               <% else %>
                 <li class="nav-item">
                 <%= link_to "About", home_about_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "商品一覧", item_index_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark" %>
                 </li>
-                
+
                 <li class="nav-item">
                   <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-dark" %>
                 </li>
                <% end %>
-  
+
             </ul>
           </div>
         </div>

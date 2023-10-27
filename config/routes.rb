@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 	}
 
 	scope module: 'public' do
-		resources :customers, only: [:show, :edit, :update] do # 顧客リソース用のルートを追加
+		resources :customers, only: [:edit, :update] do # 顧客リソース用のルートを追加
+    	get :my_page, on: :member  #マイページ用のルート
 		  get :confirm, on: :member # 退会確認ページ用のルート
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
 	namespace :admin do
 		resources :items,only: [:index, :new, :create, :show, :edit, :update, :destroy] # 管理者用の items ルート
 	  resources :customers,only: [:index, :show, :edit, :update] # 管理者用の customers ルート
-    resources :orders,only: [:show, :index] 
+    resources :orders,only: [:show, :index]
     resources :orders_detail,only: [:show]
 	end
 
