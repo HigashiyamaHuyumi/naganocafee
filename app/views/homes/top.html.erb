@@ -1,12 +1,47 @@
 <div class="container">
+
   <div class="row justify-content-center">
     <div class="col-6">
-
-    <p>ようこそ、ながのCAKEへ!
-    </br>このサイトは、ケーキ販売のECサイトになります。
-    </br>会員ではない方も商品の閲覧はできますが、
-    </br>購入には会員登録が必要になります。</p>
-
+      <p>ようこそ、ながのCAKEへ!
+      </br>このサイトは、ケーキ販売のECサイトになります。
+      </br>会員ではない方も商品の閲覧はできますが、
+      </br>購入には会員登録が必要になります。</p>
     </div>
   </div>
+
+  <div class="row">
+    <h4><b>新着商品</b></h4>
+  </div>
+  <div class="row">
+    <% @new_items.each do |item| %>
+      <div class="col-md-3 mt-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <% if item.image.attached? %>
+                <%= image_tag item.image, width: 200, height: 100 %>
+              <% else %>
+                <%= image_tag "no_image.jpg", width: 200, height: 100 %>
+              <% end %>
+            </div>
+            <div class="col-md-12 text-left">
+              <p><%= item.name %></p>
+            </div>
+            <div class="col-md-12 text-left">
+              <div class="price">
+                ￥<%= number_with_delimiter(item.price, precision: 0) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-right">
+      <%= link_to "全ての商品を見る▶", item_index_path %>
+    </div>
+  </div>
+
 </div>

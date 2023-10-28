@@ -1,34 +1,30 @@
 class Public::CustomersController < ApplicationController
-  before_action :is_matching_login_customer, only: [:show, :edit, :update, :confirm, :withdrawal]
+  before_action :is_matching_login_customer, only: [:show, :update, :confirm, :withdrawal]
 
   def my_page #顧客のマイページ
-    is_matching_login_customer
-    @customer = Customer.find(params[:id])
-    render :my_page
+    @customer = current_customer
   end
 
   def edit #顧客の登録情報編集画面
-    is_matching_login_customer
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update #顧客の登録情報更新
-    is_matching_login_customer
-    @customer = Customer.find(params[:id]) #ユーザーの取得
+    @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer)
       flash[:notice] = '登録情報を更新しました'
+      redirect_to customers_my_page_path # 更新成功時にマイページにリダイレクト
     else
-      render 'edit'
+      render 'customers_information_edit'
     end
   end
 
-  def confirm
+  def confirm #退会確認画面
     is_matching_login_customer
     @customer = Customer.find(params[:id])
   end
 
-  def withdrawal
+  def withdrawal  #退会画面
     @customer = Customer.find(params[:id])
     @customer.destroy
     redirect_to root_path, notice: "アカウントが削除されました。"

@@ -29,10 +29,9 @@
 
               <!-- 共通のメニュー項目（誰もログインしていない状態） -->
 
-
               <% if customer_signed_in? %><!-- 顧客がログインしている場合のメニュー項目 -->
                 <li class="nav-item">
-                  <%= link_to "マイページ", my_page_customer_path(current_customer), class: "btn btn-outline-dark" %>
+                  <%= link_to "マイページ", customers_my_page_path, class: "btn btn-outline-dark" %>
                 </li>
 
                 <li class="nav-item">
@@ -52,7 +51,6 @@
                 <li class="nav-item">
                   <%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-dark" %>
                 </li>
-
 
                 <li class="nav-item">
                   <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark" %>

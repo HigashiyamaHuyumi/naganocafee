@@ -1,36 +1,31 @@
 <div class="container">
-
+  <h5><span style="background-color: #dcdcdc;">商品詳細</span></h5>
   <div class="row">
-    <div class="col-md-5">
-    <h5><span style="background-color: #dcdcdc;">商品詳細</span></h5>
-
+    <div class="col-md-4">
       <% if @item.image.attached? %>
-        <%= image_tag @item.image, width: 400, height: 400 %>
+        <%= image_tag @item.image, width: 250, height: 250 %>
       <% else %>
-        <%= image_tag "no_image.jpg", width: 400, height: 400 %>
+        <%= image_tag "no_image.jpg", width: 250, height: 250 %>
       <% end %>
     </div>
-
-    <div class="col-md-5">
-      <table class = "table table-striped">
-        <tbody>
-          <tr>
-             <th>商品名</th>
-             <td><%= @item.name %></td>
-          </tr>
-           <tr>
-             <th>商品説明</th>
-             <td><%= @item.introduction %></td>
-           </tr>
-           <tr>
-             <th>税込価格</br>(税抜価格)</th>
-             <td><%= number_with_delimiter((@item.price * 1.1).to_i) %>(<%= number_with_delimiter(@item.price) %>)円</td>
-           </tr>
-        </tbody>
-      </table>
-
-      <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success" %>
+    <div class="col-md-8"> <!-- 商品名、商品説明、価格を横に配置 -->
+      <div class="row">
+        <div class="col-md-4">商品名</div>
+        <div class="col-md-8"><%= @item.name %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">商品説明</div>
+        <div class="col-md-8"><%= @item.introduction %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">税込価格<br>(税抜価格)</div>
+        <div class="col-md-8"><%= number_with_delimiter((@item.price * 1.1).to_i) %>(<%= number_with_delimiter(@item.price) %>)円</div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center"> <!-- ボタンを右寄せ -->
+          <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success" %>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>

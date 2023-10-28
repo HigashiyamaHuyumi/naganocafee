@@ -4,11 +4,11 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new
     @items = Item.all
   end
-  
+
   def new
     @item = Item.new
   end
-  
+
   def create #データを追加（保存）する
     @item = Item.new(item_params)
     if @item.save

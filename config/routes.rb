@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 	}
 
 	scope module: 'public' do
-		resources :customers, only: [:edit, :update] do # 顧客リソース用のルートを追加
-    	get :my_page, on: :member  #マイページ用のルート
+		get '/customers/my_page', to: 'customers#my_page', as: 'customers_my_page' #マイページ用のルート
+		get '/customers/information/edit', to: 'customers#edit', as: 'customers_information_edit'
+		resources :customers, only: [:update] do # 顧客リソース用のルートを追加
 		  get :confirm, on: :member # 退会確認ページ用のルート
       patch :withdrawal, on: :member # 退会処理用のルート
 		end
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
 	root to: "homes#top"
 	get '/about', to: 'homes#about', as: 'home_about' #aboutページルート
   get '/items', to: 'public/items#index', as: 'item_index' #商品一覧ページルート
+  
   get '/items/:id', to: 'public/items#show', as: 'item_show' #商品ページルート
   get '/cart_items', to: 'public/cart_items#index', as: 'cart_items_index' #カートページルート
 end
