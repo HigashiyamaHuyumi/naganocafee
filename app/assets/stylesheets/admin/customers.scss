@@ -1,3 +1,13 @@
 // Place all the styles related to the admin/customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+/* ステータスが有効の場合のスタイリング */
+.active-status {
+  text-shadow: 0 0 10px #00FF00;
+}
+
+/* ステータスが退会の場合のスタイリング */
+.inactive-status {
+  color: #808080; /* テキストの色を灰色に設定 */
+}

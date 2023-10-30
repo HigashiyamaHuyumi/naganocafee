@@ -4,6 +4,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
 
+    <!-- エラーチェック -->
     <% if @item.errors.any? %>
       <%= @item.errors.count %> errors prohibited this item from being saved:
       <ul>
@@ -16,20 +17,20 @@
     <%= form_with model: @item,url: admin_items_path, method: :post, local: true, multipart: true do |f| %>
 
       <%= f.label :"商品画像" %>
-       <%= f.file_field :image, accept: "image/*" %>
-      </br>
+      <%= f.file_field :image, accept: "image/*" %>
+      <br>
 
       <%= f.label :"商品名" %>
       <%= f.text_field :name %>
-      </br>
+      <br>
 
       <%= f.label :"商品説明" %>
       <%= f.text_area :introduction %>
-      </br>
+      <br>
 
       <%= f.label :"税抜価格" %>
       <%= f.text_field :price %>円
-      </br>
+      <br>
     </div>
   </div>
 

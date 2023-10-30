@@ -1,43 +1,51 @@
-<h5><span style="background-color: #dcdcdc;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</span></h5>
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</span></h5>
 
-<table class = "table table-striped">
-  <tbody>
-    <% if @customer.present? %>
-      <tr>
-        <th>会員ID</th>
-        <td><%= @customer.id %></td>
-      </tr>
-      <tr>
-        <th>氏名</th>
-        <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
-      </tr>
-   　  <tr>
-        <th>カナ</th>
-        <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
-      </tr>
-       <tr>
-        <th>郵便番号</th>
-        <td><%= @customer.postal_code %>
-      </tr>
-       <tr>
-        <th>住所</th>
-        <td><%= @customer.address %>
-      </tr>
-      <tr>
-        <th>電話番号</th>
-        <td><%= @customer.telephone_number %>
-      </tr>
-      <tr>
-        <th>メールアドレス</th>
-        <td><%= @customer.last_name %>
-      </tr>
-      <tr>
-        <th>会員ステータス</th>
-        <td><%= @customer.is_active ? "有効" : "退会" %>
-      </tr>
+  <div class="row">
+    <div class="col-md-8">
 
-    <% end %>
-  </tbody>
-</table>
+    <table class = "table">
+      <tbody>
+        <% if @customer.present? %>
+          <tr>
+            <th>会員ID</th>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <th>氏名</th>
+            <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
+          </tr>
+       　  <tr>
+            <th>カナ</th>
+            <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+          </tr>
+           <tr>
+            <th>郵便番号</th>
+            <td><%= @customer.postal_code %>
+          </tr>
+           <tr>
+            <th>住所</th>
+            <td><%= @customer.address %>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @customer.telephone_number %>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @customer.last_name %>
+          </tr>
+          <tr>
+            <th>会員ステータス</th>
+            <td><%= @customer.is_active ? "有効" : "退会" %>
+          </tr>
 
-<%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %>
+
+   </div>
+  </div>
+</div>

@@ -1,63 +1,73 @@
-<h5><span style="background-color: #dcdcdc;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</span></h5>
-
-<%= form_for @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
-
-  <!-- エラーチェック -->
-  <% if @customer.errors.any? %>
-    <%= @customer.errors.count %> errors prohibited this obj from being saved:
-    <ul>
-    <% @customer.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  <% end %>
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</span></h5>
   
-  <div>会員ID <%= @customer.id %></div>
-
-  <div class="field">
-    <%= f.label :氏名 %>
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+  <div class="row">
+    <div class="col-md-8">
+    
+    <%= form_for @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
+    
+      <!-- エラーチェック -->
+      <% if @customer.errors.any? %>
+        <%= @customer.errors.count %> errors prohibited this obj from being saved:
+        <ul>
+        <% @customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>
+      
+      <div>会員ID <%= @customer.id %></div>
+    
+      <div class="field">
+        <%= f.label :氏名 %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :フリガナ %>
+        <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+        <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :postal_code, "郵便番号" %>
+        <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :住所 %>
+        <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :telephone_number, "電話番号" %>
+        <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+      </div>
+    
+      <div class="field">
+        <%= f.label :メールアドレス %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label :status, "会員ステータス" %><br>
+        <label class="btn btn <%= 'active' if @customer.is_active? %>" <%= @customer.is_active? ? 'black' : 'transparent' %>">
+          <%= f.radio_button :is_active, true, class: 'form-check-input' %> 有効
+        </label>
+        <label class="btn btn <%= 'active' unless @customer.is_active? %>" <%= @customer.is_active? ? 'transparent' : 'black' %>">
+          <%= f.radio_button :is_active, false, class: 'form-check-input' %> 退会
+        </label>
+      </div>
+    </div>
+  </div>  
+    
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= f.submit "変更を保存" ,class: "btn btn-success" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :フリガナ %>
-    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
-    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postal_code, "郵便番号" %>
-    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :住所 %>
-    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telephone_number, "電話番号" %>
-    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="form-group">
-  <%= f.label :status, "会員ステータス" %><br>
-  <label class="btn btn <%= 'active' if @customer.is_active? %>" <%= @customer.is_active? ? 'black' : 'transparent' %>">
-    <%= f.radio_button :is_active, true, class: 'form-check-input' %> 有効
-  </label>
-  <label class="btn btn <%= 'active' unless @customer.is_active? %>" <%= @customer.is_active? ? 'transparent' : 'black' %>">
-    <%= f.radio_button :is_active, false, class: 'form-check-input' %> 退会
-  </label>
+  
+    <% end %>
+    
 </div>
-
-
-  <div class="actions">
-    <%= f.submit "変更を保存" ,class: "btn btn-success" %>
-  </div>
-<% end %>

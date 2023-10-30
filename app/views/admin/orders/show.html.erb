@@ -29,7 +29,9 @@
   <thead>
     <tr>
       <th>商品名</th>
-      <th>価格</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +39,8 @@
     <tr>
       <td><%= order_detail.item.name %></td>
       <td>¥<%= order_detail.purchase_price %></td>
+      <td><%= order_detail.amount %></td>
+      <td><%= (order_detail.purchase_price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
     </tr>
   <% end %>
   </tbody>
@@ -46,7 +50,7 @@
 <div>
   <p>
     <strong>商品合計</strong>
-    ¥<%= number_with_delimiter(@合計金額) %>
+    ¥<%= number_with_delimiter(@total_payment) %>
   </p>
 </div>
 <br>
@@ -59,6 +63,7 @@
 
 <div>
   <b>請求金額合計</b>
+  <%= (@order.total_payment).to_s(:delimited) %>
 </div>
 <br>
 

@@ -1,25 +1,38 @@
-<h5><span style="background-color: #dcdcdc;">会員一覧</span></h5>
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;">会員一覧</span></h5>
+  <div class="row justify-content-center">
 
-<table class = "table table-striped">
+    <div class="col-8">
 
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
+    <table class = "table table-striped">
 
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.id %></td>
-        <td><%= link_to customer.last_name, admin_customer_path(customer) %></td>
-        <td><%= customer.email %></td>
-        <td><%= customer.is_active ? "有効" : "退会" %></td>
-      </tr>
-    <% end %>
-  </tbody>
+      <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
 
-</table>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= link_to customer.last_name, admin_customer_path(customer) %></td>
+            <td><%= customer.email %></td>
+            <td>
+              <%= customer.is_active ?
+                "<span class='active-status'>有効</span>".html_safe :
+                "<span class='inactive-status'>退会</span>".html_safe
+              %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+
+    </div>
+  </div>
+</div>

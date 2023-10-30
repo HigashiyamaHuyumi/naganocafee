@@ -1,12 +1,12 @@
 class Admin::OrdersController < ApplicationController
 
   def index # 注文一覧を表示する
-    @orders = Order.all
+    @orders = Order.page(params[:page])
   end
 
   def show #注文履歴を表示する
     @order = Order.find(params[:id]) #注文IDから注文を取得
-    @order_details = @order.order_details # 注文に関連する商品情報を取得
+    @order_details = @order.order_details.all # 注文に関連する商品情報を取得
   end
 
   def update # データを更新する

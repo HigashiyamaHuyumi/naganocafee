@@ -74,7 +74,7 @@
         <% @order_details.each do |order_detail| %>
           <tr>
             <td style="border: 1px solid black;"><%= order_detail.item.name %></td>
-            <td style="border: 1px solid black;">¥<%= number_with_delimiter(@total_payment) %></td>
+            <td style="border: 1px solid black;">¥<%= number_with_delimiter(order_detail.purchase_price) %></td>
             <td style="border: 1px solid black;"><%= order_detail.amount %></td>
             <td style="border: 1px solid black;">¥<%= (order_detail.purchase_price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
           </tr>

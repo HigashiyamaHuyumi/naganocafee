@@ -1,30 +1,43 @@
-<h1>商品編集</h1>
+<div class="container">
+  <h5><span style="background-color: #dcdcdc;">商品編集</span></h5>
 
-  <!-- エラーチェック -->
-  <% if @item.errors.any? %>
-    <%= @item.errors.count %> errors prohibited this obj from being saved:
-    <ul>
-    <% @item.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+    <!-- エラーチェック -->
+    <% if @item.errors.any? %>
+      <%= @item.errors.count %> errors prohibited this obj from being saved:
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     <% end %>
-    </ul>
-  <% end %>
 
-　<%= form_for @item, url: admin_item_path(@item), method: :patch do |f| %>
-  
-  <%= f.label :"商品画像" %>
-  <%= f.file_field :image, accept: "image/*" %>
+  　<%= form_with model: @item,url: admin_item_path(@item), method: :patch do |f| %>
 
-  <h4>商品名</h4>
-  <%= f.text_field :name %>
-  
-  <h4>商品説明</h4>
-  <%= f.text_area :introduction %>
-  
-  <h4>税抜価格</h4>
-  <%= f.text_field :price %>円
-  
-  <br>
-  <%= f.submit '変更を保存' ,class: "btn btn-success" %>
-  
-  <% end %>
+      <%= f.label :"商品画像" %>
+      <%= f.file_field :image, accept: "image/*" %>
+      <br>
+
+      <%= f.label :"商品名" %>
+      <%= f.text_field :name %>
+      <br>
+
+      <%= f.label :"商品説明" %>
+      <%= f.text_area :introduction %>
+      <br>
+
+      <%= f.label :"税抜価格" %>
+      <%= f.text_field :price %>円
+      <br>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <%= f.submit '変更を保存' ,class: "btn btn-success" %>
+  </div>
+
+    <% end %>
+
+</div>
