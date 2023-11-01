@@ -1,36 +1,36 @@
 <div class="container">
   <h5><span style="background-color: #dcdcdc;">注文履歴一覧</span></h5>
-  <div class="row text-center">
+  <div class="row">
     <div class="col-md-12">
 
-    <table class = "table">
+    <table class = "table border="1"">
 
       <thead>
         <tr>
-          <th>注文日</th>
-          <th>配送先</th>
-          <th>注文商品</th>
-          <th>支払金額</th>
-          <th>注文詳細</th>
+          <th style="border: 1px solid black;">注文日</th>
+          <th style="border: 1px solid black;">配送先</th>
+          <th style="border: 1px solid black;">注文商品</th>
+          <th style="border: 1px solid black;">支払金額</th>
+          <th style="border: 1px solid black;">注文詳細</th>
         </tr>
       </thead>
 
       <tbody>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= order.created_at %></td>
-            <td>
-              <%= order.shipping_postal_code %><br>
+            <td style="border: 1px solid black;"><%= order.created_at %></td>
+            <td style="border: 1px solid black;">
+              〒<%= order.shipping_postal_code %><br>
               <%= order.shipping_address %><br>
               <%= order.shipping_name %>
             </td>
-            <td>
+            <td style="border: 1px solid black;">
               <% order.order_details.each do |order_detail| %>
                 <%= order_detail.item.name %><br>
               <% end %>
             </td>
-            <td><%= number_with_delimiter(order.total_payment) %>円</td>
-            <td>
+            <td style="border: 1px solid black;"><%= number_with_delimiter(order.total_payment) %>円</td>
+            <td style="border: 1px solid black;">
               <%= link_to order_path(order), class: "btn btn-primary" do %>
                 表示する
               <% end %>
@@ -43,5 +43,5 @@
 
     </div>
   </div>
-  
+
 </div>
