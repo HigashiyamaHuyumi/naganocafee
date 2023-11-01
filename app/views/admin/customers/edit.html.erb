@@ -51,7 +51,7 @@
       </div>
     
       <div class="form-group">
-        <%= f.label :status, "会員ステータス" %><br>
+        <%= f.label :is_active, "会員ステータス" %><br>
         <label class="btn btn <%= 'active' if @customer.is_active? %>" <%= @customer.is_active? ? 'black' : 'transparent' %>">
           <%= f.radio_button :is_active, true, class: 'form-check-input' %> 有効
         </label>
