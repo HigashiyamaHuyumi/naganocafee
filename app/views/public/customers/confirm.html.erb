@@ -20,7 +20,7 @@
       <%= link_to "退会しない", customers_information_edit_path , class: "btn btn-primary" %>
     </div>
     <div class="col-md-6 text-left">
-      <%= form_with(model: @customer, url: withdrawal_customer_path(@customer), method: :patch) do |f| %>
+      <%= form_with(model: @customer, url: withdrawal_customer_path(@customer), method: :patch, id: 'withdrawal-form') do |f| %>
         <%= f.submit "退会する", class: "btn btn-danger" %>
       <% end %>
     </div>

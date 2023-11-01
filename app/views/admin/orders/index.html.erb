@@ -16,7 +16,13 @@
           <% @orders.each do |order| %>
             <tr>
               <td><%= link_to order.created_at, admin_order_path(order) %></td>
-              <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+              <td>
+                <% if order.customer.present? %>
+                  <%= "#{order.customer.last_name} #{order.customer.first_name}" %>
+                <% else %>
+                  顧客情報なし
+                <% end %>
+              </td>
               <td><%= order.order_details.sum(:amount) %></td>
             </tr>
           <% end %>

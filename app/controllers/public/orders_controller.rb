@@ -58,13 +58,7 @@ class Public::OrdersController < ApplicationController
   def show #注文履歴詳細画面
     @order = Order.find(params[:id]) #注文IDから注文を取得
     @order_details = @order.order_details.all # 注文に関連する商品情報を取得
-    
-    @total_payment = 0 # 合計金額を初期化
-    @total_payment += ordertotal_payment
-
-    @order.customer_id = current_customer.id
-    @order.postage = 800  # 固定の送料金額（800円）
-    @order.total_payment =  @order.postage + @total_payment
+    @total_payment = @order.calculate_total_payment # 合計金額を計算
   end
 
   private

@@ -39,7 +39,7 @@
       <table class="table" border="1">
         <tr>
           <th style="border: 1px solid black;">商品合計</th>
-          <td style="border: 1px solid black;"><%= number_with_delimiter(@total_payment) %></td>
+          <td style="border: 1px solid black;"><%= (@total_payment * 1.1 ).floor.to_s(:delimited) %></td>
         </tr>
 
         <tr>
@@ -49,7 +49,7 @@
 
         <tr>
           <th style="border: 1px solid black;">ご請求額</th>
-          <td style="border: 1px solid black;"><%= (@order.total_payment).to_s(:delimited) %></td>
+          <td style="border: 1px solid black;"><%= (@total_payment * 1.1 + 800).floor.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -74,9 +74,9 @@
         <% @order_details.each do |order_detail| %>
           <tr>
             <td style="border: 1px solid black;"><%= order_detail.item.name %></td>
-            <td style="border: 1px solid black;">¥<%= number_with_delimiter(order_detail.purchase_price) %></td>
+            <td style="border: 1px solid black;"><%= (order_detail.purchase_price * 1.1).floor.to_s(:delimited) %></td>
             <td style="border: 1px solid black;"><%= order_detail.amount %></td>
-            <td style="border: 1px solid black;">¥<%= (order_detail.purchase_price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
+            <td style="border: 1px solid black;"><%= (order_detail.purchase_price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
           </tr>
         <% end %>
       </tbody>

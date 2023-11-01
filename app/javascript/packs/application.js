@@ -17,3 +17,15 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// フォーム送信前に確認ダイアログを表示
+document.addEventListener('turbolinks:load', function() {
+  const withdrawalForm = document.querySelector('#withdrawal-form');
+
+  if (withdrawalForm) {
+    withdrawalForm.addEventListener('submit', function(e) {
+      if (!confirm('本当に消しますか？')) {
+        e.preventDefault(); // フォーム送信をキャンセル
+      }
+    });
+  }
+});

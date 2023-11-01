@@ -22,6 +22,7 @@ class Public::CustomersController < ApplicationController
   def confirm #退会確認画面
     is_matching_login_customer
     @customer = Customer.find(params[:id])
+    flash[:notice] ='Book was successfully destroyed.'
   end
 
   def withdrawal  #退会画面
