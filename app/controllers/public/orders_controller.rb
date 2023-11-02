@@ -1,7 +1,11 @@
 class Public::OrdersController < ApplicationController
 
   def new #注文情報入力
-    @order = Order.new
+    if current_customer.cart_items.empty?
+    redirect_to item_index_path, alert: "カートに商品がありません。"
+    else
+      @order = Order.new
+    end
   end
 
   def confirmation #注文情報確認

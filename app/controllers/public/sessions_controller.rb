@@ -3,23 +3,33 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
   
+  def create
+    before_action
+    customer = Customer.find_by(email: params[:customer][:email])
+
+    if customer && customer.valid_password?(params[:customer][:password]) && customer.is_active
+      sign_in customer
+      redirect_to root_path
+    else
+      flash[:alert] = "ログインできません。アカウントが無効になっているか、パスワードが正しくありません。"
+      render new_customer_registration_path
+    end
+  end
+
   protected
-  
+
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email]) # 入力されたemailからアカウントを1件取得
-  
+
     if !@customer # アカウントが見つからない場合
       flash[:alert] = "アカウントが見つかりませんでした。"
       redirect_to new_customer_registration_path
-    elsif !@customer.active? # 退会している場合
+    elsif !@customer.is_active? # 退会している場合
       flash[:alert] = "退会済みのアカウントです。"
       redirect_to new_customer_registration_path
     end
   end
-   
-  def customer_state
-  # ここにcustomer_stateメソッドの実装を追加
-  end
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

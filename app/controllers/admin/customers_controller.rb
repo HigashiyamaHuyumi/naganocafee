@@ -1,6 +1,6 @@
 class Admin::CustomersController < ApplicationController
   def index
-    @customers = Customer.all
+    @customers = Customer.all # 有効な顧客と退会した顧客をすべて取得
   end
 
   def show

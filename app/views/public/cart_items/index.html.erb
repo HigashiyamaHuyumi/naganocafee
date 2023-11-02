@@ -71,8 +71,10 @@
 
   <div class="row text-center">
     <div class="col-md-12">
-      <%= link_to new_order_path, class: "btn btn-success" do %>
-        情報入力に進む
+      <% if @cart_items.any? %>
+        <%= link_to new_order_path, class: "btn btn-success" do %>
+          情報入力に進む
+        <% end %>
       <% end %>
     </div>
   </div>

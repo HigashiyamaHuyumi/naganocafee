@@ -22,10 +22,11 @@
             <td><%= link_to customer.last_name + customer.first_name , admin_customer_path(customer) %></td>
             <td><%= customer.email %></td>
             <td>
-              <%= customer.is_active ?
-                "<span class='active-status'>有効</span>".html_safe :
-                "<span class='inactive-status'>退会</span>".html_safe
-              %>
+              <% if customer.is_active? %>
+                <span class='active-status'>有効</span>
+              <% else %>
+                <span class='inactive-status'>退会</span>
+              <% end %>
             </td>
           </tr>
         <% end %>
