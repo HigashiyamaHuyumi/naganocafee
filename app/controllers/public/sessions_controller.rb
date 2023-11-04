@@ -4,7 +4,6 @@ class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
   
   def create
-    before_action
     customer = Customer.find_by(email: params[:customer][:email])
 
     if customer && customer.valid_password?(params[:customer][:password]) && customer.is_active
